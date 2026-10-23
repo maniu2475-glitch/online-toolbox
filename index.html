@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>在线工具箱 - JSON格式化、Base64、二维码、密码生成等免费在线小工具</title>
+<meta name="description" content="免费在线工具箱：JSON格式化校验、Base64编解码、URL编解码、二维码生成、密码生成器、时间戳转换、颜色转换配色、Markdown预览、字数统计。纯前端运行，数据不上传，安全快速。">
+<meta name="keywords" content="在线工具,JSON格式化,JSON校验,Base64编码,URL编码,二维码生成,密码生成器,时间戳转换,Unix时间戳,颜色转换,配色方案,Markdown预览,字数统计,免费工具">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="在线工具箱 - 免费在线小工具合集">
+<meta property="og:description" content="JSON格式化、Base64、二维码、密码生成、时间戳转换等9款免费在线工具，纯前端运行，数据不上传。">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<!-- 外部库 CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js" defer></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== 顶部广告位 Banner ===== -->
+<div class="ad-banner" id="ad-top">
+  <div class="ad-placeholder-text">广告位（728x90 / 响应式）— 此处稍后放置 AdSense 代码</div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="#home">
+      <span class="logo-icon">🧰</span>
+      <span class="logo-text">在线工具箱</span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="#tool-json" data-tool="json">JSON</a>
+      <a href="#tool-base64" data-tool="base64">Base64</a>
+      <a href="#tool-url" data-tool="url">URL</a>
+      <a href="#tool-qrcode" data-tool="qrcode">二维码</a>
+      <a href="#tool-password" data-tool="password">密码</a>
+      <a href="#tool-timestamp" data-tool="timestamp">时间戳</a>
+      <a href="#tool-color" data-tool="color">颜色</a>
+      <a href="#tool-markdown" data-tool="markdown">Markdown</a>
+      <a href="#tool-counter" data-tool="counter">字数</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout container">
+  <main class="content" id="content">
+
+    <!-- 首页简介 -->
+    <section class="tool-panel active" id="tool-home">
+      <h1>免费在线工具箱</h1>
+      <p class="intro">9 款常用在线小工具，纯浏览器本地运行，<strong>数据不上传服务器</strong>，安全、快速、免费。</p>
+      <div class="home-grid">
+        <a class="home-card" href="#tool-json"><div class="hc-icon">🧩</div><div class="hc-title">JSON 格式化/校验</div><div class="hc-desc">格式化、压缩、校验错误行号</div></a>
+        <a class="home-card" href="#tool-base64"><div class="hc-icon">🔠</div><div class="hc-title">Base64 编解码</div><div class="hc-desc">支持中文与任意文本</div></a>
+        <a class="home-card" href="#tool-url"><div class="hc-icon">🔗</div><div class="hc-title">URL 编解码</div><div class="hc-desc">encodeURIComponent / decodeURI</div></a>
+        <a class="home-card" href="#tool-qrcode"><div class="hc-icon">📱</div><div class="hc-title">二维码生成</div><div class="hc-desc">自定义尺寸，可下载 PNG</div></a>
+        <a class="home-card" href="#tool-password"><div class="hc-icon">🔐</div><div class="hc-title">密码生成器</div><div class="hc-desc">可调长度与字符集，强度评估</div></a>
+        <a class="home-card" href="#tool-timestamp"><div class="hc-icon">⏱️</div><div class="hc-title">时间戳转换</div><div class="hc-desc">Unix 秒/毫秒与日期互转</div></a>
+        <a class="home-card" href="#tool-color"><div class="hc-icon">🎨</div><div class="hc-title">颜色转换/配色</div><div class="hc-desc">HEX/RGB/HSL 互转 + 配色方案</div></a>
+        <a class="home-card" href="#tool-markdown"><div class="hc-icon">📝</div><div class="hc-title">Markdown 预览</div><div class="hc-desc">实时渲染，支持表格/代码块</div></a>
+        <a class="home-card" href="#tool-counter"><div class="hc-icon">📊</div><div class="hc-title">字数统计</div><div class="hc-desc">字符/词/行/中英文分别统计</div></a>
+      </div>
+    </section>
+
+    <!-- ===== JSON ===== -->
+    <section class="tool-panel" id="tool-json">
+      <h2>JSON 格式化 / 校验</h2>
+      <p class="tool-desc">粘贴 JSON 文本，支持格式化（美化）、压缩、错误定位校验。</p>
+      <textarea id="json-input" rows="10" placeholder='在此粘贴 JSON，例如 {"name":"工具箱","version":1}'></textarea>
+      <div class="btn-group">
+        <button class="btn" onclick="jsonFormat()">格式化</button>
+        <button class="btn" onclick="jsonMinify()">压缩</button>
+        <button class="btn btn-outline" onclick="jsonValidate()">仅校验</button>
+        <button class="btn btn-outline" onclick="jsonCopy()">复制结果</button>
+      </div>
+      <pre id="json-output" class="output"></pre>
+    </section>
+
+    <!-- ===== Base64 ===== -->
+    <section class="tool-panel" id="tool-base64">
+      <h2>Base64 编码 / 解码</h2>
+      <p class="tool-desc">支持中文（UTF-8）的 Base64 编码与解码。</p>
+      <textarea id="b64-input" rows="6" placeholder="输入文本或 Base64 字符串"></textarea>
+      <div class="btn-group">
+        <button class="btn" onclick="b64Encode()">编码 →</button>
+        <button class="btn" onclick="b64Decode()">← 解码</button>
+        <button class="btn btn-outline" onclick="swapText('b64-input','b64-output')">⇅ 交换</button>
+      </div>
+      <textarea id="b64-output" rows="6" class="output-text" readonly placeholder="结果"></textarea>
+    </section>
+
+    <!-- ===== URL ===== -->
+    <section class="tool-panel" id="tool-url">
+      <h2>URL 编码 / 解码</h2>
+      <p class="tool-desc">对文本进行 URL 编码（encodeURIComponent）或解码。</p>
+      <textarea id="url-input" rows="6" placeholder="输入文本或已编码的 URL"></textarea>
+      <div class="btn-group">
+        <button class="btn" onclick="urlEncode()">编码 →</button>
+        <button class="btn" onclick="urlDecode()">← 解码</button>
+        <button class="btn btn-outline" onclick="swapText('url-input','url-output')">⇅ 交换</button>
+      </div>
+      <textarea id="url-output" rows="6" class="output-text" readonly placeholder="结果"></textarea>
+    </section>
+
+    <!-- ===== 二维码 ===== -->
+    <section class="tool-panel" id="tool-qrcode">
+      <h2>二维码生成器</h2>
+      <p class="tool-desc">输入文本或网址，生成二维码，可右键保存或点击下载 PNG。</p>
+      <textarea id="qr-input" rows="3" placeholder="输入网址或文本，如 https://example.com"></textarea>
+      <div class="form-row">
+        <label>尺寸：<input type="range" id="qr-size" min="120" max="360" step="20" value="200"> <span id="qr-size-val">200</span>px</label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="qrGenerate()">生成二维码</button>
+        <button class="btn btn-outline" onclick="qrDownload()">下载 PNG</button>
+      </div>
+      <div id="qr-output" class="qr-box"></div>
+    </section>
+
+    <!-- ===== 密码生成器 ===== -->
+    <section class="tool-panel" id="tool-password">
+      <h2>密码生成器</h2>
+      <p class="tool-desc">使用浏览器加密随机源生成高强度密码。</p>
+      <div class="result-box" id="pwd-output">点击下方按钮生成密码</div>
+      <div class="form-row">
+        <label>长度：<input type="range" id="pwd-length" min="6" max="64" value="16" oninput="document.getElementById('pwd-length-val').textContent=this.value"> <span id="pwd-length-val">16</span> 位</label>
+      </div>
+      <div class="check-grid">
+        <label><input type="checkbox" id="pwd-upper" checked> 大写字母 A-Z</label>
+        <label><input type="checkbox" id="pwd-lower" checked> 小写字母 a-z</label>
+        <label><input type="checkbox" id="pwd-digit" checked> 数字 0-9</label>
+        <label><input type="checkbox" id="pwd-symbol" checked> 符号 !@#$%…</label>
+        <label><input type="checkbox" id="pwd-nodup"> 不含重复字符</label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="pwdGenerate()">生成密码</button>
+        <button class="btn btn-outline" onclick="pwdCopy()">复制</button>
+      </div>
+      <div class="strength-bar"><div id="pwd-strength"></div></div>
+      <p class="tool-desc" id="pwd-strength-text"></p>
+    </section>
+
+    <!-- ===== 时间戳 ===== -->
+    <section class="tool-panel" id="tool-timestamp">
+      <h2>Unix 时间戳转换</h2>
+      <p class="tool-desc">当前时间：<strong id="ts-now"></strong>（每秒自动刷新）</p>
+      <div class="grid-2">
+        <div>
+          <h3>时间戳 → 日期</h3>
+          <input type="text" id="ts-input" placeholder="如 1700000000 或 1700000000000">
+          <div class="btn-group">
+            <button class="btn" onclick="tsToDate()">转换</button>
+            <button class="btn btn-outline" onclick="document.getElementById('ts-input').value=Math.floor(Date.now()/1000)">取当前秒</button>
+          </div>
+          <div class="result-box" id="ts-date-out"></div>
+        </div>
+        <div>
+          <h3>日期 → 时间戳</h3>
+          <input type="datetime-local" id="date-input">
+          <div class="btn-group">
+            <button class="btn" onclick="dateToTs()">转换</button>
+          </div>
+          <div class="result-box" id="ts-out2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 颜色 ===== -->
+    <section class="tool-panel" id="tool-color">
+      <h2>颜色转换 & 配色方案</h2>
+      <p class="tool-desc">选择颜色，查看 HEX / RGB / HSL 表示，并生成配色方案。</p>
+      <div class="form-row">
+        <input type="color" id="color-picker" value="#4f6ef7" oninput="colorUpdate()">
+        <input type="text" id="color-hex" value="#4f6ef7" style="width:120px" oninput="colorFromHex()">
+      </div>
+      <div class="result-box" id="color-info"></div>
+      <h3>配色方案</h3>
+      <div id="palette-out" class="palette"></div>
+    </section>
+
+    <!-- ===== Markdown ===== -->
+    <section class="tool-panel" id="tool-markdown">
+      <h2>Markdown 实时预览</h2>
+      <p class="tool-desc">左侧输入 Markdown，右侧实时渲染（支持表格、代码块等 GFM 语法）。</p>
+      <div class="md-grid">
+        <textarea id="md-input" rows="16"># 欢迎使用 Markdown 预览
+
+支持 **加粗**、*斜体*、`行内代码`、[链接](https://example.com)
+
+- 列表项 1
+- 列表项 2
+
+| 工具 | 状态 |
+|------|------|
+| JSON | ✅ |
+| 二维码 | ✅ |
+
+```js
+console.log("代码块");
+```
+</textarea>
+        <div id="md-output" class="md-preview"></div>
+      </div>
+    </section>
+
+    <!-- ===== 字数统计 ===== -->
+    <section class="tool-panel" id="tool-counter">
+      <h2>字数统计</h2>
+      <p class="tool-desc">统计字符数、单词数、中文字数、行数、段落数，实时更新。</p>
+      <textarea id="count-input" rows="10" placeholder="在此粘贴或输入文本…" oninput="countText()"></textarea>
+      <div class="stat-grid" id="count-output"></div>
+    </section>
+
+  </main>
+
+  <!-- ===== 侧边栏广告位 ===== -->
+  <aside class="sidebar">
+    <div class="ad-sidebar" id="ad-side">
+      <div class="ad-placeholder-text">广告位（300x250）<br>此处稍后放置 AdSense 代码</div>
+    </div>
+    <div class="side-card">
+      <h3>隐私说明</h3>
+      <p>所有工具均在您的浏览器本地运行，数据不会上传到任何服务器。</p>
+    </div>
+    <div class="side-card">
+      <h3>工具列表</h3>
+      <ul class="side-list">
+        <li><a href="#tool-json">JSON 格式化/校验</a></li>
+        <li><a href="#tool-base64">Base64 编解码</a></li>
+        <li><a href="#tool-url">URL 编解码</a></li>
+        <li><a href="#tool-qrcode">二维码生成</a></li>
+        <li><a href="#tool-password">密码生成器</a></li>
+        <li><a href="#tool-timestamp">时间戳转换</a></li>
+        <li><a href="#tool-color">颜色/配色</a></li>
+        <li><a href="#tool-markdown">Markdown 预览</a></li>
+        <li><a href="#tool-counter">字数统计</a></li>
+      </ul>
+    </div>
+    <!-- ===== 底部矩形广告位（第二广告位） ===== -->
+    <div class="ad-sidebar ad-rect" id="ad-side-2">
+      <div class="ad-placeholder-text">广告位（300x600）</div>
+    </div>
+  </aside>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2025 在线工具箱 · 纯前端本地运行 · 数据不上传</p>
+    <p class="footer-links"><a href="#tool-json">JSON</a> · <a href="#tool-base64">Base64</a> · <a href="#tool-qrcode">二维码</a> · <a href="#tool-password">密码</a></p>
+  </div>
+</footer>
+
+<!-- ===== 底部广告位 ===== -->
+<div class="ad-banner" id="ad-bottom">
+  <div class="ad-placeholder-text">广告位（响应式横幅）— 此处稍后放置 AdSense 代码</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
