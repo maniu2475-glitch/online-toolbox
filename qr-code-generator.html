@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>在线二维码生成器 - 免费制作QR Code</title>
+<meta name="description" content="免费在线二维码生成器：输入任意文本或网址，即时生成高清二维码，支持下载，本地生成不上传，安全快速。">
+<meta name="keywords" content="免费在线二维码生成器：输入任意文本或网址，即时生成高清二维码，支持下载，本地生成不上传，安全快速。">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/online-toolbox/qr-code-generator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="二维码生成">
+<meta property="og:description" content="免费在线二维码生成器：输入任意文本或网址，即时生成高清二维码，支持下载，本地生成不上传，安全快速。">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<!-- 外部库 CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" defer></script>
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "二维码生成", "url": "https://maniu2475-glitch.github.io/online-toolbox/qr-code-generator.html", "description": "免费在线二维码生成器：输入任意文本或网址，即时生成高清二维码，支持下载，本地生成不上传，安全快速。", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "这个工具是免费的吗？需要注册吗？", "acceptedAnswer": {"@type": "Answer", "text": "完全免费，无需注册、无需登录，打开网页即可直接使用，也没有使用次数限制。"}}, {"@type": "Question", "name": "我的数据会被上传到服务器吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。所有工具都在你的浏览器本地运行，数据不经过任何服务器，即使处理敏感信息也是安全的。"}}, {"@type": "Question", "name": "支持哪些浏览器？", "acceptedAnswer": {"@type": "Answer", "text": "支持 Chrome、Edge、Firefox、Safari 等所有现代浏览器，手机和电脑均可使用。"}}]}</script></head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">在线工具箱</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">二维码</a>
+      <a href="index.html#tool-password" data-tool="password">密码</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">时间戳</a>
+      <a href="index.html#tool-color" data-tool="color">颜色</a>
+      <a href="index.html#tool-markdown" data-tool="markdown">Markdown</a>
+      <a href="index.html#tool-counter" data-tool="counter">字数</a>
+      <a href="index.html#tool-hash" data-tool="hash">哈希</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP查询</a>
+      <a href="index.html#tool-radix" data-tool="radix">进制转换</a>
+      <a href="index.html#tool-unit" data-tool="unit">单位换算</a>
+      <a href="index.html#tool-case" data-tool="case">大小写</a>
+      <a href="index.html#tool-textsort" data-tool="textsort">文本处理</a>
+      <a href="index.html#tool-csv" data-tool="csv">CSV转JSON</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-jwt" data-tool="jwt">JWT解码</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-qrcode">
+      <h1>在线二维码生成器</h1>
+      
+      
+      <p class="tool-desc">输入文本或网址，生成二维码，可右键保存或点击下载 PNG。</p>
+      <textarea id="qr-input" rows="3" placeholder="输入网址或文本，如 https://example.com"></textarea>
+      <div class="form-row">
+        <label>尺寸：<input type="range" id="qr-size" min="120" max="360" step="20" value="200"> <span id="qr-size-val">200</span>px</label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="qrGenerate()">生成二维码</button>
+        <button class="btn btn-outline" onclick="qrDownload()">下载 PNG</button>
+      </div>
+      <div id="qr-output" class="qr-box"></div>
+    
+      <hr>
+      <h2>关于本工具</h2>
+      <p style="line-height:1.9">输入网址、文本、WiFi信息、名片内容，即刻生成二维码。二维码由浏览器本地生成，内容不上传任何服务器，适合生成支付码、分享链接等敏感信息。 本站所有工具均在浏览器本地运行，打开即用，无需安装任何软件，也不会上传你的任何数据。如果你觉得好用，欢迎把页面分享给同事和朋友。</p>
+      <h3>相关工具</h3>
+      <div class="btn-group" style="flex-wrap:wrap"><a class="btn btn-outline" href="json-formatter.html">JSON格式化</a>
+<a class="btn btn-outline" href="base64.html">Base64编解码</a>
+<a class="btn btn-outline" href="url-encode-decode.html">URL编解码</a>
+<a class="btn btn-outline" href="password-generator.html">密码生成</a>
+<a class="btn btn-outline" href="timestamp-converter.html">时间戳转换</a>
+<a class="btn btn-outline" href="color-converter.html">颜色转换</a>
+<a class="btn btn-outline" href="markdown-editor.html">Markdown预览</a>
+<a class="btn btn-outline" href="word-counter.html">字数统计</a>
+<a class="btn btn-outline" href="md5-generator.html">MD5哈希</a>
+<a class="btn btn-outline" href="ip-lookup.html">IP查询</a>
+<a class="btn btn-outline" href="number-converter.html">进制转换</a>
+<a class="btn btn-outline" href="unit-converter.html">单位换算</a>
+<a class="btn btn-outline" href="case-converter.html">大小写转换</a>
+<a class="btn btn-outline" href="text-sort.html">文本排序去重</a>
+<a class="btn btn-outline" href="csv-to-json.html">CSV转JSON</a>
+<a class="btn btn-outline" href="uuid-generator.html">UUID生成</a>
+<a class="btn btn-outline" href="jwt-decoder.html">JWT解码</a></div>
+      <h3>常见问题</h3>
+      <div style="line-height:1.9"><details><summary><strong>这个工具是免费的吗？需要注册吗？</strong></summary><p>完全免费，无需注册、无需登录，打开网页即可直接使用，也没有使用次数限制。</p></details>
+<details><summary><strong>我的数据会被上传到服务器吗？</strong></summary><p>不会。所有工具都在你的浏览器本地运行，数据不经过任何服务器，即使处理敏感信息也是安全的。</p></details>
+<details><summary><strong>支持哪些浏览器？</strong></summary><p>支持 Chrome、Edge、Firefox、Safari 等所有现代浏览器，手机和电脑均可使用。</p></details></div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 在线工具箱</p><p class="footer-links"><a href="index.html#home">🧰 在线工具箱</a></p></div></footer>
+<script src="app.js"></script>
+
+</body>
+</html>
