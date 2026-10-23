@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://YOUR_USERNAME.github.io/tools/sitemap.xml
+Sitemap: https://maniu2475-glitch.github.io/online-toolbox/sitemap.xml
