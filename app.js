@@ -294,3 +294,187 @@ function countText() {
 
 /* ---------- 初始化 ---------- */
 document.addEventListener('DOMContentLoaded', initNav);
+
+/* ===== v2 新增工具 ===== */
+
+/* 哈希 */
+async function hashCompute() {
+  const text = document.getElementById('hash-input').value;
+  const out = document.getElementById('hash-out');
+  if (!text) { out.textContent = '请输入文本'; return; }
+  const enc = new TextEncoder().encode(text);
+  const results = [];
+  results.push('MD5     : ' + (window.md5 ? md5(text) : '需加载库'));
+  for (const alg of ['SHA-1', 'SHA-256', 'SHA-512']) {
+    const buf = await crypto.subtle.digest(alg, enc);
+    const hex = [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+    results.push(alg.padEnd(8, ' ') + ': ' + hex);
+  }
+  out.textContent = results.join('\n');
+  out.style.whiteSpace = 'pre-wrap';
+}
+
+/* IP 查询 */
+async function ipLookup() {
+  const out = document.getElementById('ip-out');
+  out.textContent = '查询中…';
+  try {
+    const r = await fetch('https://ipapi.co/json/');
+    const d = await r.json();
+    out.textContent = '您的 IP：' + d.ip + '\n归属地：' + (d.country_name || '') + ' ' + (d.region || '') + ' ' + (d.city || '') +
+      '\n运营商/组织：' + (d.org || '未知') + '\n时区：' + (d.timezone || '未知');
+  } catch (e) {
+    try {
+      const r2 = await fetch('https://ip.useragentinfo.com/json');
+      const d2 = await r2.json();
+      out.textContent = '您的 IP：' + d2.ip + '\n归属地：' + d2.province + ' ' + d2.city + ' ' + (d2.isp || '');
+    } catch (e2) { out.textContent = '❌ 查询失败，请稍后重试'; }
+  }
+  out.style.whiteSpace = 'pre-wrap';
+}
+
+/* 进制转换 */
+function radixConvert() {
+  const from = +document.getElementById('radix-from').value;
+  const val = document.getElementById('radix-input').value.trim();
+  const out = document.getElementById('radix-out');
+  if (!val) { out.textContent = ''; return; }
+  const num = parseInt(val, from);
+  if (isNaN(num)) { out.textContent = '❌ 输入不是有效的' + from + '进制数字'; return; }
+  out.textContent = '二进制 : ' + num.toString(2) + '\n八进制 : ' + num.toString(8) +
+    '\n十进制 : ' + num.toString(10) + '\n十六进制: ' + num.toString(16).toUpperCase();
+  out.style.whiteSpace = 'pre-wrap';
+}
+
+/* 单位换算 */
+const UNITS = {
+  temp: [['摄氏度 (°C)', 1, 0], ['华氏度 (°F)', 5/9, -32], ['开尔文 (K)', 1, -273.15]],
+  length: [['毫米 (mm)', 1], ['厘米 (cm)', 10], ['米 (m)', 1000], ['千米 (km)', 1e6], ['英寸 (in)', 25.4], ['英尺 (ft)', 304.8], ['英里 (mi)', 1.609e6]],
+  weight: [['毫克 (mg)', 1], ['克 (g)', 1000], ['千克 (kg)', 1e6], ['吨 (t)', 1e9], ['盎司 (oz)', 28349.5], ['磅 (lb)', 453592]],
+  area: [['平方厘米 (cm²)', 1], ['平方米 (m²)', 1e4], ['平方千米 (km²)', 1e10], ['公顷 (ha)', 1e8], ['英亩 (acre)', 4.047e7]]
+};
+function unitChangeCat() {
+  const cat = document.getElementById('unit-cat').value;
+  const list = UNITS[cat];
+  const from = document.getElementById('unit-from');
+  const to = document.getElementById('unit-to');
+  from.innerHTML = list.map((u, i) => '<option value="' + i + '">' + u[0] + '</option>').join('');
+  to.innerHTML = from.innerHTML;
+  from.selectedIndex = 0; to.selectedIndex = Math.min(1, list.length - 1);
+  unitConvert();
+}
+function unitConvert() {
+  const cat = document.getElementById('unit-cat').value;
+  const list = UNITS[cat];
+  const v = parseFloat(document.getElementById('unit-val').value);
+  const out = document.getElementById('unit-out');
+  if (isNaN(v)) { out.textContent = ''; return; }
+  const f = list[+document.getElementById('unit-from').value];
+  const t = list[+document.getElementById('unit-to').value];
+  if (cat === 'temp') {
+    // 先换算回摄氏度再转到目标
+    let c = f[2] === 0 ? v : (v + f[2]) * f[1];
+    let result = t[2] === 0 ? c : c / t[1] - t[2];
+    out.textContent = v + ' ' + f[0] + ' = ' + +result.toFixed(4) + ' ' + t[0];
+  } else {
+    const base = v * f[1];
+    out.textContent = v + ' ' + f[0] + ' = ' + +(base / t[1]).toPrecision(8) + ' ' + t[0];
+  }
+}
+document.addEventListener('DOMContentLoaded', unitChangeCat);
+
+/* 大小写 */
+function caseDo(mode) {
+  const text = document.getElementById('case-input').value;
+  let r = text;
+  if (mode === 'upper') r = text.toUpperCase();
+  else if (mode === 'lower') r = text.toLowerCase();
+  else if (mode === 'cap') r = text.toLowerCase().replace(/(^|\s+)([a-z])/g, (m, a, b) => a + b.toUpperCase());
+  else if (mode === 'camel') r = text.toLowerCase().replace(/[^a-zA-Z0-9]+(.)?/g, (m, c) => c ? c.toUpperCase() : '');
+  else if (mode === 'snake') r = text.replace(/([a-z])([A-Z])/g, '$1_$2').replace(/[\s-]+/g, '_').toLowerCase();
+  document.getElementById('case-output').value = r;
+}
+
+/* 文本排序 */
+function tsort(mode) {
+  const raw = document.getElementById('tsort-input').value;
+  let lines = raw.split('\n');
+  if (mode === 'dedup') lines = [...new Set(lines)];
+  else if (mode === 'asc') lines.sort((a, b) => a.localeCompare(b, 'zh'));
+  else if (mode === 'desc') lines.sort((a, b) => b.localeCompare(a, 'zh'));
+  else if (mode === 'len') lines.sort((a, b) => a.length - b.length);
+  else if (mode === 'trim') lines = lines.filter(l => l.trim());
+  else if (mode === 'num') lines = lines.map((l, i) => (i + 1) + '. ' + l);
+  else if (mode === 'rev') lines.reverse();
+  document.getElementById('tsort-output').value = lines.join('\n');
+}
+
+/* CSV → JSON */
+function csvToJson() {
+  const text = document.getElementById('csv-input').value.trim();
+  const sep = document.getElementById('csv-sep').value;
+  const out = document.getElementById('csv-output');
+  if (!text) { out.textContent = '请输入 CSV 内容'; return; }
+  const lines = text.split(/\r?\n/).filter(l => l.trim());
+  const parseLine = l => {
+    const cells = [];
+    let cur = '', inQ = false;
+    for (const ch of l) {
+      if (ch === '"' && (inQ || cur === '' || true)) { inQ = !inQ; continue; }
+      if (ch === sep && !inQ) { cells.push(cur); cur = ''; } else cur += ch;
+    }
+    cells.push(cur);
+    return cells.map(c => c.trim());
+  };
+  const header = parseLine(lines[0]);
+  const data = lines.slice(1).map(l => {
+    const cells = parseLine(l);
+    const obj = {};
+    header.forEach((h, i) => obj[h] = isNaN(+cells[i]) || cells[i] === '' ? cells[i] : +cells[i]);
+    return obj;
+  });
+  out.textContent = JSON.stringify(data, null, 2);
+}
+function csvCopy() {
+  navigator.clipboard.writeText(document.getElementById('csv-output').textContent).then(() => alert('已复制'));
+}
+
+/* UUID */
+function uuidGen() {
+  const n = Math.min(100, Math.max(1, +document.getElementById('uuid-count').value || 5));
+  const upper = document.getElementById('uuid-upper').checked;
+  const list = [];
+  for (let i = 0; i < n; i++) {
+    if (crypto.randomUUID) { list.push(crypto.randomUUID()); }
+    else {
+      const b = crypto.getRandomValues(new Uint8Array(16));
+      b[6] = (b[6] & 15) | 64; b[8] = (b[8] & 63) | 128;
+      const h = [...b].map(x => x.toString(16).padStart(2, '0')).join('');
+      list.push(h.slice(0,8) + '-' + h.slice(8,12) + '-' + h.slice(12,16) + '-' + h.slice(16,20) + '-' + h.slice(20));
+    }
+  }
+  document.getElementById('uuid-output').textContent = (upper ? list.map(u => u.toUpperCase()) : list).join('\n');
+}
+function uuidCopy() {
+  navigator.clipboard.writeText(document.getElementById('uuid-output').textContent).then(() => alert('已复制'));
+}
+
+/* JWT 解码 */
+function jwtDecode() {
+  const token = document.getElementById('jwt-input').value.trim();
+  const out = document.getElementById('jwt-output');
+  const parts = token.split('.');
+  if (parts.length < 2) { out.textContent = '❌ 不是有效的 JWT（需要 header.payload.signature 三段）'; return; }
+  const dec = s => {
+    s = s.replace(/-/g, '+').replace(/_/g, '/');
+    while (s.length % 4) s += '=';
+    try { return JSON.parse(decodeURIComponent(escape(atob(s)))); } catch (e) { return '❌ 解码失败'; }
+  };
+  const header = dec(parts[0]), payload = dec(parts[1]);
+  let html = 'Header:\n' + JSON.stringify(header, null, 2) + '\n\nPayload:\n' + JSON.stringify(payload, null, 2);
+  if (payload && typeof payload.exp === 'number') {
+    const exp = new Date(payload.exp * 1000);
+    html += '\n\n过期时间：' + exp.toLocaleString('zh-CN', { hour12: false }) + (exp < new Date() ? '（已过期 ⚠️）' : '（有效 ✅）');
+  }
+  out.textContent = html;
+}

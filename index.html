@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>在线工具箱 - JSON格式化、Base64、二维码、密码生成等免费在线小工具</title>
-<meta name="description" content="免费在线工具箱：JSON格式化校验、Base64编解码、URL编解码、二维码生成、密码生成器、时间戳转换、颜色转换配色、Markdown预览、字数统计。纯前端运行，数据不上传，安全快速。">
+<meta name="description" content="免费在线工具箱：JSON格式化校验、Base64编解码、URL编解码、二维码生成、密码生成器、时间戳转换、颜色转换配色、Markdown预览、字数统计、MD5哈希、IP查询、进制转换、单位换算、JWT解码。纯前端运行，数据不上传，安全快速。">
 <meta name="keywords" content="在线工具,JSON格式化,JSON校验,Base64编码,URL编码,二维码生成,密码生成器,时间戳转换,Unix时间戳,颜色转换,配色方案,Markdown预览,字数统计,免费工具">
 <meta name="author" content="ToolBox">
 <meta name="robots" content="index,follow">
@@ -16,13 +16,14 @@
 <!-- Open Graph / SEO -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="在线工具箱 - 免费在线小工具合集">
-<meta property="og:description" content="JSON格式化、Base64、二维码、密码生成、时间戳转换等9款免费在线工具，纯前端运行，数据不上传。">
+<meta property="og:description" content="JSON格式化、Base64、二维码、密码生成、时间戳转换等18款免费在线工具，纯前端运行，数据不上传。">
 <meta property="og:locale" content="zh_CN">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
 <!-- 外部库 CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js" defer></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -49,6 +50,15 @@
       <a href="#tool-color" data-tool="color">颜色</a>
       <a href="#tool-markdown" data-tool="markdown">Markdown</a>
       <a href="#tool-counter" data-tool="counter">字数</a>
+      <a href="#tool-hash" data-tool="hash">哈希</a>
+      <a href="#tool-ip" data-tool="ip">IP查询</a>
+      <a href="#tool-radix" data-tool="radix">进制转换</a>
+      <a href="#tool-unit" data-tool="unit">单位换算</a>
+      <a href="#tool-case" data-tool="case">大小写</a>
+      <a href="#tool-textsort" data-tool="textsort">文本处理</a>
+      <a href="#tool-csv" data-tool="csv">CSV转JSON</a>
+      <a href="#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="#tool-jwt" data-tool="jwt">JWT解码</a>
     </nav>
   </div>
 </header>
@@ -59,7 +69,7 @@
     <!-- 首页简介 -->
     <section class="tool-panel active" id="tool-home">
       <h1>免费在线工具箱</h1>
-      <p class="intro">9 款常用在线小工具，纯浏览器本地运行，<strong>数据不上传服务器</strong>，安全、快速、免费。</p>
+      <p class="intro">18 款常用在线小工具，纯浏览器本地运行，<strong>数据不上传服务器</strong>，安全、快速、免费。</p>
       <div class="home-grid">
         <a class="home-card" href="#tool-json"><div class="hc-icon">🧩</div><div class="hc-title">JSON 格式化/校验</div><div class="hc-desc">格式化、压缩、校验错误行号</div></a>
         <a class="home-card" href="#tool-base64"><div class="hc-icon">🔠</div><div class="hc-title">Base64 编解码</div><div class="hc-desc">支持中文与任意文本</div></a>
@@ -70,7 +80,16 @@
         <a class="home-card" href="#tool-color"><div class="hc-icon">🎨</div><div class="hc-title">颜色转换/配色</div><div class="hc-desc">HEX/RGB/HSL 互转 + 配色方案</div></a>
         <a class="home-card" href="#tool-markdown"><div class="hc-icon">📝</div><div class="hc-title">Markdown 预览</div><div class="hc-desc">实时渲染，支持表格/代码块</div></a>
         <a class="home-card" href="#tool-counter"><div class="hc-icon">📊</div><div class="hc-title">字数统计</div><div class="hc-desc">字符/词/行/中英文分别统计</div></a>
-      </div>
+        <a class="home-card" href="#tool-hash"><div class="hc-icon">#️⃣</div><div class="hc-title">MD5/SHA 哈希</div><div class="hc-desc">MD5、SHA1、SHA256 全支持</div></a>
+        <a class="home-card" href="#tool-ip"><div class="hc-icon">🌐</div><div class="hc-title">IP 查询</div><div class="hc-desc">查看您的 IP 与归属地信息</div></a>
+        <a class="home-card" href="#tool-radix"><div class="hc-icon">🔢</div><div class="hc-title">进制转换</div><div class="hc-desc">二进制/八进制/十进制/十六进制</div></a>
+        <a class="home-card" href="#tool-unit"><div class="hc-icon">📏</div><div class="hc-title">单位换算</div><div class="hc-desc">温度、长度、重量、面积</div></a>
+        <a class="home-card" href="#tool-case"><div class="hc-icon">🔤</div><div class="hc-title">大小写转换</div><div class="hc-desc">全大写/小写/首字母/驼峰</div></a>
+        <a class="home-card" href="#tool-textsort"><div class="hc-icon">📋</div><div class="hc-title">文本去重/排序</div><div class="hc-desc">去重、排序、去空行、提取</div></a>
+        <a class="home-card" href="#tool-csv"><div class="hc-icon">📄</div><div class="hc-title">CSV 转 JSON</div><div class="hc-desc">支持自定义分隔符</div></a>
+        <a class="home-card" href="#tool-uuid"><div class="hc-icon">🆔</div><div class="hc-title">UUID 生成器</div><div class="hc-desc">批量生成 UUID v4</div></a>
+        <a class="home-card" href="#tool-jwt"><div class="hc-icon">🔑</div><div class="hc-title">JWT 解码</div><div class="hc-desc">解码 Header/Payload，本地运行</div></a>
+
     </section>
 
     <!-- ===== JSON ===== -->
@@ -222,6 +241,133 @@ console.log("代码块");
       <div class="stat-grid" id="count-output"></div>
     </section>
 
+    <!-- ===== 哈希 ===== -->
+    <section class="tool-panel" id="tool-hash">
+      <h2>MD5 / SHA 哈希计算</h2>
+      <p class="tool-desc">在浏览器本地计算文本的 MD5、SHA-1、SHA-256、SHA-512 哈希值。</p>
+      <textarea id="hash-input" rows="4" placeholder="输入要计算哈希的文本"></textarea>
+      <div class="btn-group"><button class="btn" onclick="hashCompute()">计算哈希</button></div>
+      <div class="result-box" id="hash-out"></div>
+    </section>
+
+    <!-- ===== IP 查询 ===== -->
+    <section class="tool-panel" id="tool-ip">
+      <h2>IP 查询</h2>
+      <p class="tool-desc">点击按钮查询您的公网 IP 与归属地信息（调用公开 API，仅查询时发送请求）。</p>
+      <div class="btn-group"><button class="btn" onclick="ipLookup()">查询我的 IP</button></div>
+      <div class="result-box" id="ip-out">点击按钮开始查询</div>
+    </section>
+
+    <!-- ===== 进制转换 ===== -->
+    <section class="tool-panel" id="tool-radix">
+      <h2>进制转换</h2>
+      <p class="tool-desc">输入任意进制数字，同时显示二/八/十/十六进制结果。</p>
+      <div class="form-row">
+        <select id="radix-from">
+          <option value="2">二进制 (2)</option>
+          <option value="8">八进制 (8)</option>
+          <option value="10" selected>十进制 (10)</option>
+          <option value="16">十六进制 (16)</option>
+        </select>
+        <input type="text" id="radix-input" placeholder="输入数字" oninput="radixConvert()">
+      </div>
+      <div class="result-box" id="radix-out"></div>
+    </section>
+
+    <!-- ===== 单位换算 ===== -->
+    <section class="tool-panel" id="tool-unit">
+      <h2>单位换算</h2>
+      <p class="tool-desc">温度、长度、重量、面积常用单位换算。</p>
+      <div class="form-row">
+        <select id="unit-cat" onchange="unitChangeCat()">
+          <option value="temp">温度</option>
+          <option value="length">长度</option>
+          <option value="weight">重量</option>
+          <option value="area">面积</option>
+        </select>
+        <input type="number" id="unit-val" value="1" oninput="unitConvert()">
+        <select id="unit-from" onchange="unitConvert()"></select>
+        <span>→</span>
+        <select id="unit-to" onchange="unitConvert()"></select>
+      </div>
+      <div class="result-box" id="unit-out"></div>
+    </section>
+
+    <!-- ===== 大小写 ===== -->
+    <section class="tool-panel" id="tool-case">
+      <h2>大小写转换</h2>
+      <p class="tool-desc">全大写、全小写、首字母大写、驼峰、下划线等多种转换。</p>
+      <textarea id="case-input" rows="5" placeholder="输入文本"></textarea>
+      <div class="btn-group">
+        <button class="btn" onclick="caseDo('upper')">全大写</button>
+        <button class="btn" onclick="caseDo('lower')">全小写</button>
+        <button class="btn" onclick="caseDo('cap')">首字母大写</button>
+        <button class="btn" onclick="caseDo('camel')">驼峰</button>
+        <button class="btn" onclick="caseDo('snake')">下划线</button>
+      </div>
+      <textarea id="case-output" rows="5" class="output-text" readonly placeholder="结果"></textarea>
+    </section>
+
+    <!-- ===== 文本处理 ===== -->
+    <section class="tool-panel" id="tool-textsort">
+      <h2>文本去重 / 排序</h2>
+      <p class="tool-desc">按行去重、排序（升/降/长度）、去空行、添加行号、反转。</p>
+      <textarea id="tsort-input" rows="8" placeholder="每行一个条目"></textarea>
+      <div class="btn-group">
+        <button class="btn" onclick="tsort('dedup')">去重</button>
+        <button class="btn" onclick="tsort('asc')">升序</button>
+        <button class="btn" onclick="tsort('desc')">降序</button>
+        <button class="btn" onclick="tsort('len')">按长度</button>
+        <button class="btn" onclick="tsort('trim')">去空行</button>
+        <button class="btn" onclick="tsort('num')">加行号</button>
+        <button class="btn" onclick="tsort('rev')">反转</button>
+      </div>
+      <textarea id="tsort-output" rows="8" class="output-text" readonly placeholder="结果"></textarea>
+    </section>
+
+    <!-- ===== CSV → JSON ===== -->
+    <section class="tool-panel" id="tool-csv">
+      <h2>CSV 转 JSON</h2>
+      <p class="tool-desc">首行为表头，支持逗号/制表符/分号分隔，自动去引号。</p>
+      <textarea id="csv-input" rows="8" placeholder="name,age&#10;Tom,18&#10;Jerry,22"></textarea>
+      <div class="form-row">
+        <select id="csv-sep">
+          <option value=",">逗号 ,</option>
+          <option value="&#9;">制表符 Tab</option>
+          <option value=";">分号 ;</option>
+        </select>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="csvToJson()">转换为 JSON</button>
+        <button class="btn btn-outline" onclick="csvCopy()">复制结果</button>
+      </div>
+      <pre id="csv-output" class="output"></pre>
+    </section>
+
+    <!-- ===== UUID ===== -->
+    <section class="tool-panel" id="tool-uuid">
+      <h2>UUID 生成器</h2>
+      <p class="tool-desc">使用浏览器加密随机源批量生成 UUID v4。</p>
+      <div class="form-row">
+        <label>数量：<input type="number" id="uuid-count" min="1" max="100" value="5"></label>
+        <label><input type="checkbox" id="uuid-upper"> 大写</label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="uuidGen()">生成 UUID</button>
+        <button class="btn btn-outline" onclick="uuidCopy()">复制</button>
+      </div>
+      <pre id="uuid-output" class="output"></pre>
+    </section>
+
+    <!-- ===== JWT ===== -->
+    <section class="tool-panel" id="tool-jwt">
+      <h2>JWT 解码</h2>
+      <p class="tool-desc">解码 JWT 的 Header 和 Payload（不验证签名，纯本地解码）。</p>
+      <textarea id="jwt-input" rows="4" placeholder="粘贴 JWT，形如 eyJhbGciOi..."></textarea>
+      <div class="btn-group"><button class="btn" onclick="jwtDecode()">解码</button></div>
+      <pre id="jwt-output" class="output"></pre>
+    </section>
+
   </main>
 
   <!-- ===== 侧边栏广告位 ===== -->
@@ -245,6 +391,15 @@ console.log("代码块");
         <li><a href="#tool-color">颜色/配色</a></li>
         <li><a href="#tool-markdown">Markdown 预览</a></li>
         <li><a href="#tool-counter">字数统计</a></li>
+        <li><a href="#tool-hash">MD5/SHA 哈希</a></li>
+        <li><a href="#tool-ip">IP 查询</a></li>
+        <li><a href="#tool-radix">进制转换</a></li>
+        <li><a href="#tool-unit">单位换算</a></li>
+        <li><a href="#tool-case">大小写转换</a></li>
+        <li><a href="#tool-textsort">文本去重/排序</a></li>
+        <li><a href="#tool-csv">CSV 转 JSON</a></li>
+        <li><a href="#tool-uuid">UUID 生成</a></li>
+        <li><a href="#tool-jwt">JWT 解码</a></li>
       </ul>
     </div>
     <!-- ===== 底部矩形广告位（第二广告位） ===== -->
