@@ -106,7 +106,7 @@ MIT
 
 ## 🌍 英文站（同步运营）
 
-英文站 <https://maniu2475-glitch.github.io/tools-en/> 共 **48 个工具**（2026-10-24），包括：
+英文站 <https://maniu2475-glitch.github.io/tools-en/> 共 **58 个工具**（2026-10-24），包括：
 
 - JSON/Base64/URL 编解码、二维码生成与扫描、密码生成与强度检查
 - 时间戳、颜色转换与取色器、Markdown、字数统计、哈希、IP、进制、单位、大小写
@@ -115,7 +115,8 @@ MIT
 - 计算器类：百分比、BMI、年龄、贷款月供、复利、折扣、随机数
 - 开发工具：chmod 权限计算、正则测试、温度换算
 - 新增（2026-10-24）：JSON to CSV、SHA-256 哈希生成、去重复行、CSS 压缩、XML 格式化校验
+- 新增（2026-10-24 第二批）：Code 128 条形码生成器（PNG/SVG 导出）、ROT13/凯撒密码、摩尔斯电码翻译（含音频）、数字转英文单词、Hex↔文本转换
 
 ## 🌐 英文站
 
-英文站 [tools-en](https://github.com/maniu2475-glitch/tools-en) 现有 **53 个工具**（2026-10-24 新增：日期差计算、罗马数字转换、小费计算、VAT 计算、配速计算），均已提交 sitemap 与 IndexNow。
+英文站 [tools-en](https://github.com/maniu2475-glitch/tools-en) 现有 **58 个工具**。2026-10-24 两批新增：日期差计算、罗马数字转换、小费计算、VAT 计算、配速计算；Code 128 条形码生成器、ROT13/凯撒密码、摩尔斯电码翻译、数字转英文单词、Hex 转文本。均已提交 sitemap 与 IndexNow。
