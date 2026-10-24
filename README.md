@@ -118,6 +118,8 @@ MIT
 - 新增（2026-10-24 第二批）：Code 128 条形码生成器（PNG/SVG 导出）、ROT13/凯撒密码、摩尔斯电码翻译（含音频）、数字转英文单词、Hex↔文本转换
 - 新增（2026-10-24 第三批）：Text Reverser 文本反转、JSON to YAML 转换、JavaScript 压缩器、GPA 计算器（4.0 制）、随机字母生成器
 
+- 新增（2026-10-24 第四批）：Binary to Text 二进制转换、Simple Interest 单利计算器、SQL Formatter 格式化、Word Frequency 词频统计、Quadratic Solver 一元二次方程求解
+
 ## 🌐 英文站
 
-英文站 [tools-en](https://github.com/maniu2475-glitch/tools-en) 现有 **63 个工具**。2026-10-24 三批新增：日期差计算、罗马数字转换、小费计算、VAT 计算、配速计算；Code 128 条形码生成器、ROT13/凯撒密码、摩尔斯电码翻译、数字转英文单词、Hex 转文本；Text Reverser、JSON to YAML、JS Minifier、GPA Calculator、Random Letter Generator。均已提交 sitemap 与 IndexNow（65 URL）。
+英文站 [tools-en](https://github.com/maniu2475-glitch/tools-en) 现有 **68 个工具**。2026-10-24 三批新增：日期差计算、罗马数字转换、小费计算、VAT 计算、配速计算；Code 128 条形码生成器、ROT13/凯撒密码、摩尔斯电码翻译、数字转英文单词、Hex 转文本；Text Reverser、JSON to YAML、JS Minifier、GPA Calculator、Random Letter Generator。均已提交 sitemap 与 IndexNow（70 URL）。
