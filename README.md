@@ -115,3 +115,7 @@ MIT
 - 计算器类：百分比、BMI、年龄、贷款月供、复利、折扣、随机数
 - 开发工具：chmod 权限计算、正则测试、温度换算
 - 新增（2026-10-24）：JSON to CSV、SHA-256 哈希生成、去重复行、CSS 压缩、XML 格式化校验
+
+## 🌐 英文站
+
+英文站 [tools-en](https://github.com/maniu2475-glitch/tools-en) 现有 **53 个工具**（2026-10-24 新增：日期差计算、罗马数字转换、小费计算、VAT 计算、配速计算），均已提交 sitemap 与 IndexNow。
