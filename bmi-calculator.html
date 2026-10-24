@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMI 计算器 在线 - 身高体重算 BMI 与标准体重区间</title>
+<meta name="description" content="免费在线 BMI 计算器：输入身高体重立即算出 BMI 指数，同时给出中国成人标准与 WHO 分级，并显示对应身高的标准体重区间。纯浏览器本地计算，无需登录，数据不上传。">
+<meta name="keywords" content="BMI 计算器 在线,BMI 指数计算,身高体重 BMI,标准体重区间,体脂 超重 判断,中国 BMI 标准">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/online-toolbox/bmi-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="BMI 计算器 在线">
+<meta property="og:description" content="输入身高体重立即算出 BMI、中国与 WHO 分级，并给出标准体重区间。免费、本地计算、无需登录。">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "BMI 计算器", "url": "https://maniu2475-glitch.github.io/online-toolbox/bmi-calculator.html", "description": "免费在线 BMI 计算器：输入身高体重立即算出 BMI 指数，同时给出中国成人标准与 WHO 分级，并显示对应身高的标准体重区间。", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "BMI 分级该看中国标准还是 WHO 标准？", "acceptedAnswer": {"@type": "Answer", "text": "页面会同时给出两套结果。中国成人标准以 24 为超重界限、28 为肥胖界限；WHO 国际标准以 25 和 30 为界限。中国人群日常参考中国标准更合适。"}}, {"@type": "Question", "name": "标准体重区间是怎么算出来的？", "acceptedAnswer": {"@type": "Answer", "text": "把 BMI 正常范围的下限和上限分别乘以身高的平方（米为单位），得到的就是该身高对应的体重区间，例如身高 1.70 米对应约 53.5 至 69.1 公斤。"}}, {"@type": "Question", "name": "计算结果会上传到服务器吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。身高体重只在你的浏览器里参与运算，页面不发送任何请求，刷新后也不会保留。"}}]}</script></head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">在线工具箱</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">二维码</a>
+      <a href="index.html#tool-password" data-tool="password">密码</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">时间戳</a>
+      <a href="index.html#tool-color" data-tool="color">颜色</a>
+      <a href="index.html#tool-markdown" data-tool="markdown">Markdown</a>
+      <a href="index.html#tool-counter" data-tool="counter">字数</a>
+      <a href="index.html#tool-hash" data-tool="hash">哈希</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP查询</a>
+      <a href="index.html#tool-radix" data-tool="radix">进制转换</a>
+      <a href="index.html#tool-unit" data-tool="unit">单位换算</a>
+      <a href="index.html#tool-case" data-tool="case">大小写</a>
+      <a href="index.html#tool-textsort" data-tool="textsort">文本处理</a>
+      <a href="index.html#tool-csv" data-tool="csv">CSV转JSON</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-jwt" data-tool="jwt">JWT解码</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-bmi">
+      <h1>BMI 计算器（身体质量指数）</h1>
+
+      <p class="tool-desc">输入身高和体重，实时计算 BMI，并给出中国成人标准、WHO 标准分级与标准体重区间。</p>
+      <div class="form-row">
+        <label>身高（厘米）：<input type="text" id="bmi-height" inputmode="decimal" placeholder="如 170" style="width:130px" oninput="bmiAuto()"></label>
+        <label>体重（公斤）：<input type="text" id="bmi-weight" inputmode="decimal" placeholder="如 65" style="width:130px" oninput="bmiAuto()"></label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="bmiCalc(true)">计算 BMI</button>
+        <button class="btn btn-outline" onclick="bmiReset()">清空</button>
+      </div>
+      <div class="result-box" id="bmi-out">请输入身高和体重后点击「计算 BMI」</div>
+      <div class="stat-grid" id="bmi-stats"></div>
+
+      <hr>
+      <h2>关于 BMI 计算器</h2>
+      <p style="line-height:1.9">BMI（Body Mass Index，身体质量指数）是用体重和身高粗略衡量胖瘦程度的常用指标，计算只需要两个数字，适合成年人做日常体重管理参考。使用方法很简单：在身高一栏填厘米数（例如 170），在体重一栏填公斤数（例如 65），结果会随输入即时更新，也可以点击「计算 BMI」按钮。填错或留空时，页面会给出明确提示，不会显示一个凭空编造的结果。所有运算都在你的浏览器内完成，输入内容不会发送到任何服务器。</p>
+      <h3>计算公式与分级口径</h3>
+      <p style="line-height:1.9">计算公式为：BMI = 体重（公斤）÷ 身高（米）的平方。例如身高 1.70 米、体重 65 公斤，则 BMI = 65 ÷ (1.70 × 1.70) ≈ 22.5。本工具同时给出两套分级：中国成人标准（WS/T 428）为 BMI 低于 18.5 偏瘦、18.5 至 23.9 正常、24 至 27.9 超重、28 及以上肥胖；WHO 国际标准则以 18.5、25、30 为分界。两套标准的分界值不同，所以同一份数据在两个口径下可能落在不同区间，页面会把两种结论都列出来，避免只给一个模糊的“正常”或“偏胖”。</p>
+      <h3>标准体重区间与理想体重</h3>
+      <p style="line-height:1.9">标准体重区间是把 BMI 正常范围的下限和上限分别乘以身高的平方得到的，也就是“在这个身高下，体重落在多少公斤之间算正常”。本工具按中国标准 18.5 至 23.9 计算区间，同时给出常用的理想体重估算值（身高厘米数减 105）。区间只是一个统计范围，不是必须精确命中的目标值；肌肉量高的人 BMI 可能偏高但体脂并不高，孕期、哺乳期、儿童青少年和运动员也不适合直接用成人 BMI 判断，这些情况应结合体脂率、腰围或咨询医生。</p>
+      <h3>相关工具</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <a class="btn btn-outline" href="age-calculator.html">年龄计算器</a>
+        <a class="btn btn-outline" href="percentage-calculator.html">百分比计算器</a>
+        <a class="btn btn-outline" href="unit-converter.html">单位换算</a>
+        <a class="btn btn-outline" href="timestamp-converter.html">时间戳转换</a>
+        <a class="btn btn-outline" href="word-counter.html">字数统计</a>
+        <a class="btn btn-outline" href="index.html#home">全部工具</a>
+      </div>
+      <h3>常见问题</h3>
+      <div style="line-height:1.9">
+        <details><summary><strong>BMI 分级该看中国标准还是 WHO 标准？</strong></summary><p>页面会同时给出两套结果。中国成人标准以 24 为超重界限、28 为肥胖界限；WHO 国际标准以 25 和 30 为界限。中国人群日常参考中国标准更合适。</p></details>
+        <details><summary><strong>标准体重区间是怎么算出来的？</strong></summary><p>把 BMI 正常范围的下限和上限分别乘以身高的平方（米为单位），得到的就是该身高对应的体重区间，例如身高 1.70 米对应约 53.5 至 69.1 公斤。</p></details>
+        <details><summary><strong>计算结果会上传到服务器吗？</strong></summary><p>不会。身高体重只在你的浏览器里参与运算，页面不发送任何请求，刷新后也不会保留。</p></details>
+      </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 在线工具箱</p><p class="footer-links"><a href="index.html#home">🧰 在线工具箱</a></p></div></footer>
+<script src="app.js"></script>
+<script>
+function bmiGradeCn(b) {
+  if (b < 18.5) return '偏瘦（BMI 低于 18.5）';
+  if (b < 24) return '正常（18.5 至 23.9）';
+  if (b < 28) return '超重（24 至 27.9）';
+  return '肥胖（28 及以上）';
+}
+function bmiGradeWho(b) {
+  if (b < 18.5) return '偏瘦（BMI 低于 18.5）';
+  if (b < 25) return '正常（18.5 至 24.9）';
+  if (b < 30) return '超重（25 至 29.9）';
+  return '肥胖（30 及以上）';
+}
+function bmiAuto() {
+  const h = document.getElementById('bmi-height').value.trim();
+  const w = document.getElementById('bmi-weight').value.trim();
+  if (h && w) bmiCalc(false);
+}
+function bmiCalc(strict) {
+  const out = document.getElementById('bmi-out');
+  const stats = document.getElementById('bmi-stats');
+  const hRaw = document.getElementById('bmi-height').value.trim();
+  const wRaw = document.getElementById('bmi-weight').value.trim();
+  stats.innerHTML = '';
+  if (!hRaw || !wRaw) {
+    if (strict) out.textContent = '❌ 请把身高和体重都填写完整';
+    return;
+  }
+  const h = parseFloat(hRaw), w = parseFloat(wRaw);
+  if (!isFinite(h) || !isFinite(w)) {
+    if (strict) out.textContent = '❌ 请输入有效的数字，身高单位为厘米、体重单位为公斤';
+    return;
+  }
+  if (h < 50 || h > 250) {
+    out.textContent = '❌ 身高请输入 50 至 250 厘米之间的数值';
+    return;
+  }
+  if (w < 10 || w > 500) {
+    out.textContent = '❌ 体重请输入 10 至 500 公斤之间的数值';
+    return;
+  }
+  const m = h / 100;
+  const bmi = w / (m * m);
+  const cn = bmiGradeCn(bmi);
+  const who = bmiGradeWho(bmi);
+  out.innerHTML = '<strong style="font-size:22px;color:#4f6ef7">BMI ' + bmi.toFixed(1) + '</strong>'
+    + '<div style="margin-top:8px">中国成人标准：' + cn + '</div>'
+    + '<div>WHO 国际标准：' + who + '</div>';
+  const lo = 18.5 * m * m;
+  const hi = 23.9 * m * m;
+  const ideal = h - 105;
+  let diff;
+  if (w < lo) diff = '低于下限 ' + (lo - w).toFixed(1) + ' 公斤';
+  else if (w > hi) diff = '超过上限 ' + (w - hi).toFixed(1) + ' 公斤';
+  else diff = '在区间之内';
+  const items = [
+    [ (ideal > 0 ? ideal.toFixed(1) : '—') + ' kg', '理想体重（身高-105）'],
+    [ lo.toFixed(1) + ' ~ ' + hi.toFixed(1) + ' kg', '标准体重区间'],
+    [ diff, '与标准区间对比'],
+    [ bmi.toFixed(2), 'BMI 精确值']
+  ];
+  stats.innerHTML = items.map(function (it) {
+    return '<div class="stat-item"><div class="stat-num" style="font-size:16px">' + it[0] + '</div><div class="stat-label">' + it[1] + '</div></div>';
+  }).join('');
+}
+function bmiReset() {
+  document.getElementById('bmi-height').value = '';
+  document.getElementById('bmi-weight').value = '';
+  document.getElementById('bmi-stats').innerHTML = '';
+  document.getElementById('bmi-out').textContent = '请输入身高和体重后点击「计算 BMI」';
+}
+</script>
+</body>
+</html>

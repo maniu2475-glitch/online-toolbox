@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>chmod 权限计算器 在线 - 755、数字与 rwx 符号互转</title>
+<meta name="description" content="免费在线 chmod 权限计算器：勾选九宫格 rwx 权限位，即时得到 755、644 等数字表示与 rwxr-xr-x 符号表示；也可输入数字或符号反向回填。纯浏览器本地计算，无需登录。">
+<meta name="keywords" content="chmod 权限计算器,Linux 权限 755,chmod 755 含义,rwx 转数字,文件权限计算,chmod 644">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/online-toolbox/chmod-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="chmod 权限计算器">
+<meta property="og:description" content="勾选 rwx 九宫格得到 755 等数字权限，或输入数字/符号反向换算，免费本地运行。">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "chmod 权限计算器", "url": "https://maniu2475-glitch.github.io/online-toolbox/chmod-calculator.html", "description": "免费在线 chmod 权限计算器：勾选九宫格 rwx 权限位，即时得到数字表示与符号表示，也支持输入数字或符号反向换算。", "applicationCategory": "DeveloperApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "chmod 755 是什么含义？", "acceptedAnswer": {"@type": "Answer", "text": "755 表示所有者拥有读、写、执行权限（7），同组用户和其他用户拥有读和执行权限（5）。常用于目录、可执行脚本和网页静态文件。"}}, {"@type": "Question", "name": "数字 7、6、5、4 分别对应哪些权限？", "acceptedAnswer": {"@type": "Answer", "text": "读为 4、写为 2、执行为 1，三者相加得到该位数字。7 是读写执行，6 是读写，5 是读和执行，4 是只读，0 表示没有任何权限。"}}, {"@type": "Question", "name": "为什么目录必须要有执行权限？", "acceptedAnswer": {"@type": "Answer", "text": "目录的执行权限代表可以进入该目录、访问其中的文件。只有读权限能列出文件名，但无法进入或读取文件内容，所以目录通常需要 755，而不是 644。"}}]}</script></head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">在线工具箱</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">二维码</a>
+      <a href="index.html#tool-password" data-tool="password">密码</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">时间戳</a>
+      <a href="index.html#tool-color" data-tool="color">颜色</a>
+      <a href="index.html#tool-markdown" data-tool="markdown">Markdown</a>
+      <a href="index.html#tool-counter" data-tool="counter">字数</a>
+      <a href="index.html#tool-hash" data-tool="hash">哈希</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP查询</a>
+      <a href="index.html#tool-radix" data-tool="radix">进制转换</a>
+      <a href="index.html#tool-unit" data-tool="unit">单位换算</a>
+      <a href="index.html#tool-case" data-tool="case">大小写</a>
+      <a href="index.html#tool-textsort" data-tool="textsort">文本处理</a>
+      <a href="index.html#tool-csv" data-tool="csv">CSV转JSON</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-jwt" data-tool="jwt">JWT解码</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-chmod">
+      <h1>chmod 权限计算器</h1>
+
+      <p class="tool-desc">勾选所有者、用户组、其他用户的读/写/执行权限，即时生成 755 等数字写法与 rwxr-xr-x 符号写法；也可以直接输入数字或符号，自动回填九宫格。</p>
+
+      <div class="grid-2" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+        <div>
+          <h3 style="margin-top:0">所有者 owner</h3>
+          <div style="margin-bottom:8px"><label><input type="checkbox" id="bit-u-r" checked onchange="chmodFromBits()"> 读 r（4）</label></div>
+          <div style="margin-bottom:8px"><label><input type="checkbox" id="bit-u-w" checked onchange="chmodFromBits()"> 写 w（2）</label></div>
+          <div style="margin-bottom:8px"><label><input type="checkbox" id="bit-u-x" checked onchange="chmodFromBits()"> 执行 x（1）</label></div>
+        </div>
+        <div>
+          <h3 style="margin-top:0">用户组 group</h3>
+          <div style="margin-bottom:8px"><label><input type="checkbox" id="bit-g-r" checked onchange="chmodFromBits()"> 读 r（4）</label></div>
+          <div style="margin-bottom:8px"><label><input type="checkbox" id="bit-g-w" onchange="chmodFromBits()"> 写 w（2）</label></div>
+          <div style="margin-bottom:8px"><label><input type="checkbox" id="bit-g-x" checked onchange="chmodFromBits()"> 执行 x（1）</label></div>
+        </div>
+        <div>
+          <h3 style="margin-top:0">其他用户 other</h3>
+          <div style="margin-bottom:8px"><label><input type="checkbox" id="bit-o-r" checked onchange="chmodFromBits()"> 读 r（4）</label></div>
+          <div style="margin-bottom:8px"><label><input type="checkbox" id="bit-o-w" onchange="chmodFromBits()"> 写 w（2）</label></div>
+          <div style="margin-bottom:8px"><label><input type="checkbox" id="bit-o-x" checked onchange="chmodFromBits()"> 执行 x（1）</label></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>数字表示：<input type="text" id="chmod-num" value="755" maxlength="3" style="width:90px;text-align:center" oninput="chmodFromInput('num')"></label>
+        <label>符号表示：<input type="text" id="chmod-sym" value="rwxr-xr-x" maxlength="9" style="width:150px;text-align:center" oninput="chmodFromInput('sym')"></label>
+      </div>
+      <div class="result-box" id="chmod-out"></div>
+      <div id="chmod-detail" style="line-height:1.9;font-size:14px"></div>
+
+      <hr>
+      <h2>关于 chmod 权限计算器</h2>
+      <p style="line-height:1.9">在 Linux 和类 Unix 系统里，每个文件都有三组权限，分别对应所有者、同组用户和其他用户；每组又包含读、写、执行三个开关，共九个位置。这个页面把九个开关做成可以直接点选的九宫格，你勾选之后，上方会立刻显示对应的数字写法（例如 755）和符号写法（例如 rwxr-xr-x），省去手算加法和查表。反过来，如果你手上只有一条 chmod 命令或一段权限字符串，把它填进数字框或符号框，九宫格会自动勾选成对应状态，方便确认权限到底开放给了谁。全程在浏览器本地计算，不会连接服务器。</p>
+      <h3>数字与符号的换算规则</h3>
+      <p style="line-height:1.9">每个权限位有固定权重：读（r）为 4，写（w）为 2，执行（x）为 1，把同一组里勾选的权重相加，就得到这一组的数字，三组依次排列形成三位数字。例如所有者读写执行是 4+2+1=7，用户组读和执行是 4+1=5，其他用户读和执行也是 5，合起来就是 755。符号写法则是每组固定三个字符，没有权限的位置用短横线占位，所以 755 写作 rwxr-x-r-x，标准写法为 rwxr-xr-x。常见组合还有 644（所有者读写、其他用户只读，适合普通文件）、600（仅所有者读写，适合私钥和配置文件）、777（所有人拥有全部权限，通常不建议使用）。</p>
+      <h3>使用场景与安全提醒</h3>
+      <p style="line-height:1.9">网页静态文件常用 644，目录常用 755，因为目录的执行权限代表“可以进入”，缺少它会导致明明有读权限也无法访问文件。可执行脚本和程序一般用 755，私钥、密钥文件用 600，避免同组或其他用户读取。符号表示中的 s 和 t 属于特殊权限位（setuid、setgid、sticky），会在数字前多出一位，例如 4755、1777，本页的九宫格只覆盖基础的三组 rwx，遇到这类权限请在数字框下方按基础位换算后自行补上特殊位。另外不要把 777 当作省事的默认值，它意味着任何能登录系统的用户都可以修改甚至替换文件，是常见的安全隐患。</p>
+      <h3>相关工具</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <a class="btn btn-outline" href="regex-tester.html">正则测试器</a>
+        <a class="btn btn-outline" href="number-converter.html">进制转换</a>
+        <a class="btn btn-outline" href="json-formatter.html">JSON 格式化</a>
+        <a class="btn btn-outline" href="md5-generator.html">MD5 哈希</a>
+        <a class="btn btn-outline" href="url-encode-decode.html">URL 编解码</a>
+        <a class="btn btn-outline" href="index.html#home">全部工具</a>
+      </div>
+      <h3>常见问题</h3>
+      <div style="line-height:1.9">
+        <details><summary><strong>chmod 755 是什么含义？</strong></summary><p>755 表示所有者拥有读、写、执行权限（7），同组用户和其他用户拥有读和执行权限（5）。常用于目录、可执行脚本和网页静态文件。</p></details>
+        <details><summary><strong>数字 7、6、5、4 分别对应哪些权限？</strong></summary><p>读为 4、写为 2、执行为 1，三者相加得到该位数字。7 是读写执行，6 是读写，5 是读和执行，4 是只读，0 表示没有任何权限。</p></details>
+        <details><summary><strong>为什么目录必须要有执行权限？</strong></summary><p>目录的执行权限代表可以进入该目录、访问其中的文件。只有读权限能列出文件名，但无法进入或读取文件内容，所以目录通常需要 755，而不是 644。</p></details>
+      </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 在线工具箱</p><p class="footer-links"><a href="index.html#home">🧰 在线工具箱</a></p></div></footer>
+<script src="app.js"></script>
+<script>
+const CHMOD_ROLES = [
+  { key: 'u', label: '所有者 owner' },
+  { key: 'g', label: '用户组 group' },
+  { key: 'o', label: '其他用户 other' }
+];
+const CHMOD_PERM_NAMES = { 4: '读', 2: '写', 1: '执行' };
+
+function chmodSymOf(d) {
+  let s = '';
+  s += (d & 4) ? 'r' : '-';
+  s += (d & 2) ? 'w' : '-';
+  s += (d & 1) ? 'x' : '-';
+  return s;
+}
+function chmodBitsToSym(digits) {
+  return digits.map(chmodSymOf).join('');
+}
+function chmodBoxesToDigits() {
+  return CHMOD_ROLES.map(function (r) {
+    let d = 0;
+    if (document.getElementById('bit-' + r.key + '-r').checked) d += 4;
+    if (document.getElementById('bit-' + r.key + '-w').checked) d += 2;
+    if (document.getElementById('bit-' + r.key + '-x').checked) d += 1;
+    return d;
+  });
+}
+function chmodSetBoxes(digits) {
+  CHMOD_ROLES.forEach(function (r, i) {
+    const d = digits[i];
+    document.getElementById('bit-' + r.key + '-r').checked = !!(d & 4);
+    document.getElementById('bit-' + r.key + '-w').checked = !!(d & 2);
+    document.getElementById('bit-' + r.key + '-x').checked = !!(d & 1);
+  });
+}
+function chmodDetailOf(digits) {
+  let html = '';
+  CHMOD_ROLES.forEach(function (r, i) {
+    const d = digits[i];
+    const perms = [];
+    const weights = [];
+    if (d & 4) { perms.push('读取'); weights.push(4); }
+    if (d & 2) { perms.push('写入'); weights.push(2); }
+    if (d & 1) { perms.push('执行'); weights.push(1); }
+    const text = perms.length ? perms.join('、') : '没有任何权限';
+    const expr = weights.length > 1 ? weights.join(' + ') + ' = ' + d : String(d);
+    html += '<div><strong>' + r.label + '</strong>：' + expr + '，可' + text + '</div>';
+  });
+  html += '<div style="margin-top:6px" class="tool-desc">符号写法中，每组固定三位，依次为读 r、写 w、执行 x，没有权限的位置用 - 占位。</div>';
+  return html;
+}
+function chmodRender(digits) {
+  const num = digits.join('');
+  const sym = chmodBitsToSym(digits);
+  document.getElementById('chmod-out').innerHTML =
+    '<strong style="font-size:24px;color:#4f6ef7">' + num + '</strong>'
+    + '<span style="margin-left:14px;font-size:17px;font-family:monospace">' + sym + '</span>'
+    + '<div style="margin-top:8px">chmod ' + num + ' 文件名</div>';
+  document.getElementById('chmod-detail').innerHTML = chmodDetailOf(digits);
+}
+function chmodFromBits() {
+  const digits = chmodBoxesToDigits();
+  document.getElementById('chmod-num').value = digits.join('');
+  document.getElementById('chmod-sym').value = chmodBitsToSym(digits);
+  chmodRender(digits);
+}
+function chmodFromInput(kind) {
+  const out = document.getElementById('chmod-out');
+  if (kind === 'num') {
+    const v = document.getElementById('chmod-num').value.trim();
+    if (!/^[0-7]{3}$/.test(v)) {
+      out.textContent = '⚠️ 数字需为 3 位八进制数（0 至 7），例如 755';
+      return;
+    }
+    const digits = v.split('').map(Number);
+    document.getElementById('chmod-sym').value = chmodBitsToSym(digits);
+    chmodSetBoxes(digits);
+    chmodRender(digits);
+  } else {
+    const v = document.getElementById('chmod-sym').value.trim();
+    if (!/^[r-][w-][x-][r-][w-][x-][r-][w-][x-]$/.test(v)) {
+      out.textContent = '⚠️ 符号需为 9 个字符，只能由 r、w、x、- 组成，例如 rwxr-xr-x';
+      return;
+    }
+    const digits = [0, 1, 2].map(function (i) {
+      const part = v.slice(i * 3, i * 3 + 3);
+      return (part[0] === 'r' ? 4 : 0) + (part[1] === 'w' ? 2 : 0) + (part[2] === 'x' ? 1 : 0);
+    });
+    document.getElementById('chmod-num').value = digits.join('');
+    chmodSetBoxes(digits);
+    chmodRender(digits);
+  }
+}
+document.addEventListener('DOMContentLoaded', chmodFromBits);
+</script>
+</body>
+</html>

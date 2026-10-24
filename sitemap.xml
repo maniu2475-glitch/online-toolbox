@@ -7,14 +7,32 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://maniu2475-glitch.github.io/online-toolbox/age-calculator.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://maniu2475-glitch.github.io/online-toolbox/base64.html</loc>
     <lastmod>2026-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://maniu2475-glitch.github.io/online-toolbox/bmi-calculator.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://maniu2475-glitch.github.io/online-toolbox/case-converter.html</loc>
     <lastmod>2026-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maniu2475-glitch.github.io/online-toolbox/chmod-calculator.html</loc>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -73,8 +91,20 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://maniu2475-glitch.github.io/online-toolbox/percentage-calculator.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://maniu2475-glitch.github.io/online-toolbox/qr-code-generator.html</loc>
     <lastmod>2026-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maniu2475-glitch.github.io/online-toolbox/regex-tester.html</loc>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

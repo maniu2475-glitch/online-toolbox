@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>百分比计算器 在线 - 占比、涨跌幅、增加减少百分比</title>
+<meta name="description" content="免费在线百分比计算器：算出 X 是 Y 的百分之几、两个数之间的涨跌幅、原值增加或减少百分之几后的结果。输入即算并给出错误提示，纯浏览器本地运行，无需登录。">
+<meta name="keywords" content="百分比计算器 在线,X是Y的百分之几,涨跌幅计算,百分比增加减少,占比计算,增长率计算">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/online-toolbox/percentage-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="百分比计算器">
+<meta property="og:description" content="占比、涨跌幅、增加减少百分比，三种常用百分比计算一次搞定，免费本地计算。">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "百分比计算器", "url": "https://maniu2475-glitch.github.io/online-toolbox/percentage-calculator.html", "description": "免费在线百分比计算器：算出 X 是 Y 的百分之几、两个数之间的涨跌幅、原值增加或减少百分之几后的结果。", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "涨跌幅的分母是原值还是新值？", "acceptedAnswer": {"@type": "Answer", "text": "涨跌幅的通用算法是以原值（变化前的数值）为分母，即（新值减原值）除以原值再乘百分之百。以新值为分母会得到不同的数，比较时容易出错。"}}, {"@type": "Question", "name": "为什么原值为 0 时无法计算涨跌幅？", "acceptedAnswer": {"@type": "Answer", "text": "涨跌幅要除以原值，原值为 0 时分母为 0，结果没有数学意义。此时只能描述变化量，不能描述变化率。"}}, {"@type": "Question", "name": "百分比和百分点有什么区别？", "acceptedAnswer": {"@type": "Answer", "text": "从 5% 上升到 8%，可以说是上升了 3 个百分点，也可以说相对上升了 60%。前者是两个百分数直接相减，后者是变化量除以原百分数，两者不能混用。"}}]}</script></head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">在线工具箱</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">二维码</a>
+      <a href="index.html#tool-password" data-tool="password">密码</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">时间戳</a>
+      <a href="index.html#tool-color" data-tool="color">颜色</a>
+      <a href="index.html#tool-markdown" data-tool="markdown">Markdown</a>
+      <a href="index.html#tool-counter" data-tool="counter">字数</a>
+      <a href="index.html#tool-hash" data-tool="hash">哈希</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP查询</a>
+      <a href="index.html#tool-radix" data-tool="radix">进制转换</a>
+      <a href="index.html#tool-unit" data-tool="unit">单位换算</a>
+      <a href="index.html#tool-case" data-tool="case">大小写</a>
+      <a href="index.html#tool-textsort" data-tool="textsort">文本处理</a>
+      <a href="index.html#tool-csv" data-tool="csv">CSV转JSON</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-jwt" data-tool="jwt">JWT解码</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-percentage">
+      <h1>百分比计算器</h1>
+
+      <p class="tool-desc">三种最常用的百分比算法：求占比、求涨跌幅、按百分比增减。输入数字即可看到结果。</p>
+
+      <h3>一、X 是 Y 的百分之几</h3>
+      <div class="form-row">
+        <input type="text" id="pct-x" inputmode="decimal" placeholder="部分值 X，如 25" style="width:150px" oninput="shareCalc(false)">
+        <span>是</span>
+        <input type="text" id="pct-y" inputmode="decimal" placeholder="总量 Y，如 200" style="width:150px" oninput="shareCalc(false)">
+        <span>的</span>
+        <button class="btn" onclick="shareCalc(true)">计算占比</button>
+      </div>
+      <div class="result-box" id="pct-out">填写 X 和 Y 后显示占比</div>
+
+      <h3>二、涨跌幅（原值 → 新值）</h3>
+      <div class="form-row">
+        <input type="text" id="chg-old" inputmode="decimal" placeholder="原值，如 100" style="width:150px" oninput="changeCalc(false)">
+        <span>→</span>
+        <input type="text" id="chg-new" inputmode="decimal" placeholder="新值，如 120" style="width:150px" oninput="changeCalc(false)">
+        <button class="btn" onclick="changeCalc(true)">计算涨跌幅</button>
+      </div>
+      <div class="result-box" id="chg-out">填写原值和新值后显示涨跌幅</div>
+
+      <h3>三、原值增加或减少百分之几</h3>
+      <div class="form-row">
+        <input type="text" id="mod-base" inputmode="decimal" placeholder="原值，如 200" style="width:150px" oninput="modifyCalc(false)">
+        <span>增减</span>
+        <input type="text" id="mod-pct" inputmode="decimal" placeholder="百分比，如 15" style="width:130px" oninput="modifyCalc(false)">
+        <span>%</span>
+        <button class="btn" onclick="modifyCalc(true)">计算增减后</button>
+      </div>
+      <div class="result-box" id="mod-out">填写原值和百分比后显示增加、减少两个结果</div>
+      <div class="stat-grid" id="mod-stats"></div>
+
+      <hr>
+      <h2>关于百分比计算器</h2>
+      <p style="line-height:1.9">百分比是日常生活里最容易算错的一类数字：打折、工资涨幅、考试正确率、销售额占比、利息变化，背后其实是不同的公式。本页把三种最常见的需求放在一起，输入数字就会实时出结果，不需要记公式。第一个模块回答“X 是 Y 的百分之几”，例如 25 是 200 的 12.5%；第二个模块回答“从原值变到新值，涨了或跌了百分之几”；第三个模块回答“原值增加或减少某个百分比之后是多少”，会同时给出增加后和减少后的两个数值。所有输入都会做检查，空值、非数字、除数为 0 都会明确提示，不会显示占位假数据。</p>
+      <h3>三个模块各自的口径</h3>
+      <p style="line-height:1.9">求占比的公式是 X ÷ Y × 100%，这里的 Y 是总量或基准，X 是其中的一部分，结果可能超过 100%，说明 X 比 Y 还大，这并不算错误。涨跌幅的公式是（新值 − 原值）÷ 原值 × 100%，正数代表上涨，负数代表下跌，分母必须是变化前的原值，因为我们要衡量的是“相对原来变化了多少”。增减百分比模块则以原值为基数，增加后的结果等于原值 ×（1 + 百分比 ÷ 100），减少后的结果等于原值 ×（1 − 百分比 ÷ 100），百分比填负数时会自动反向。举例来说，200 增加 15% 是 230，减少 15% 是 170，一增一减并不回到 200，这是百分比计算的常见陷阱。</p>
+      <h3>常见误区与使用建议</h3>
+      <p style="line-height:1.9">第一，不要把“百分比”和“百分点”混为一谈：从 5% 涨到 8%，可以说涨了 3 个百分点，也可以说相对上涨了 60%，两种说法含义不同。第二，涨跌幅不可逆：下跌 50% 后需要上涨 100% 才能回到原点，所以用涨跌幅比较风险时要注意基数已经变了。第三，多个百分比不能直接相加，尤其是基于不同基数的占比。第四，财务、统计等正式场景对四舍五入位数有要求，本页默认保留两位小数并去掉多余的零，需要更精确的结果时请以原始数据自行复算。</p>
+      <h3>相关工具</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <a class="btn btn-outline" href="bmi-calculator.html">BMI 计算器</a>
+        <a class="btn btn-outline" href="age-calculator.html">年龄计算器</a>
+        <a class="btn btn-outline" href="unit-converter.html">单位换算</a>
+        <a class="btn btn-outline" href="number-converter.html">进制转换</a>
+        <a class="btn btn-outline" href="timestamp-converter.html">时间戳转换</a>
+        <a class="btn btn-outline" href="index.html#home">全部工具</a>
+      </div>
+      <h3>常见问题</h3>
+      <div style="line-height:1.9">
+        <details><summary><strong>涨跌幅的分母是原值还是新值？</strong></summary><p>涨跌幅的通用算法是以原值（变化前的数值）为分母，即（新值减原值）除以原值再乘百分之百。以新值为分母会得到不同的数，比较时容易出错。</p></details>
+        <details><summary><strong>为什么原值为 0 时无法计算涨跌幅？</strong></summary><p>涨跌幅要除以原值，原值为 0 时分母为 0，结果没有数学意义。此时只能描述变化量，不能描述变化率。</p></details>
+        <details><summary><strong>百分比和百分点有什么区别？</strong></summary><p>从 5% 上升到 8%，可以说是上升了 3 个百分点，也可以说相对上升了 60%。前者是两个百分数直接相减，后者是变化量除以原百分数，两者不能混用。</p></details>
+      </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 在线工具箱</p><p class="footer-links"><a href="index.html#home">🧰 在线工具箱</a></p></div></footer>
+<script src="app.js"></script>
+<script>
+function pctFmt(n) {
+  if (!isFinite(n)) return '—';
+  return n.toFixed(2).replace(/\.?0+$/, '');
+}
+function pctRead(id) {
+  const raw = document.getElementById(id).value.trim();
+  if (!raw) return { empty: true };
+  const v = Number(raw);
+  if (!isFinite(v)) return { bad: true };
+  return { v: v };
+}
+function shareCalc(strict) {
+  const out = document.getElementById('pct-out');
+  const a = pctRead('pct-x'), b = pctRead('pct-y');
+  if (a.empty || b.empty) {
+    if (strict) out.textContent = '❌ 请把 X 和 Y 都填写完整';
+    return;
+  }
+  if (a.bad || b.bad) {
+    out.textContent = '❌ 请输入有效的数字';
+    return;
+  }
+  if (b.v === 0) {
+    out.textContent = '❌ 总量 Y 不能为 0，否则无法计算占比';
+    return;
+  }
+  const r = a.v / b.v * 100;
+  out.innerHTML = '<strong style="font-size:20px;color:#4f6ef7">' + pctFmt(r) + '%</strong>'
+    + '<div style="margin-top:6px">' + pctFmt(a.v) + ' 是 ' + pctFmt(b.v) + ' 的 ' + pctFmt(r) + '%</div>';
+}
+function changeCalc(strict) {
+  const out = document.getElementById('chg-out');
+  const a = pctRead('chg-old'), b = pctRead('chg-new');
+  if (a.empty || b.empty) {
+    if (strict) out.textContent = '❌ 请把原值和新值都填写完整';
+    return;
+  }
+  if (a.bad || b.bad) {
+    out.textContent = '❌ 请输入有效的数字';
+    return;
+  }
+  if (a.v === 0) {
+    out.textContent = '❌ 原值为 0，涨跌幅没有意义';
+    return;
+  }
+  const diff = b.v - a.v;
+  const r = diff / a.v * 100;
+  let label;
+  if (diff > 0) label = '上涨 ' + pctFmt(r) + '%';
+  else if (diff < 0) label = '下降 ' + pctFmt(Math.abs(r)) + '%';
+  else label = '没有变化';
+  out.innerHTML = '<strong style="font-size:20px;color:#4f6ef7">' + label + '</strong>'
+    + '<div style="margin-top:6px">从 ' + pctFmt(a.v) + ' 变为 ' + pctFmt(b.v)
+    + '，变化量 ' + (diff > 0 ? '+' : '') + pctFmt(diff)
+    + '，变化率 ' + (r > 0 ? '+' : '') + pctFmt(r) + '%</div>';
+}
+function modifyCalc(strict) {
+  const out = document.getElementById('mod-out');
+  const stats = document.getElementById('mod-stats');
+  const a = pctRead('mod-base'), p = pctRead('mod-pct');
+  stats.innerHTML = '';
+  if (a.empty || p.empty) {
+    if (strict) out.textContent = '❌ 请把原值和百分比都填写完整';
+    return;
+  }
+  if (a.bad || p.bad) {
+    out.textContent = '❌ 请输入有效的数字';
+    return;
+  }
+  const up = a.v * (1 + p.v / 100);
+  const down = a.v * (1 - p.v / 100);
+  out.innerHTML = '原值 ' + pctFmt(a.v) + ' 增减 ' + pctFmt(p.v) + '% 后：'
+    + '<strong style="color:#4f6ef7">增加后 ' + pctFmt(up) + '</strong>，'
+    + '<strong style="color:#4f6ef7">减少后 ' + pctFmt(down) + '</strong>';
+  const items = [
+    [pctFmt(up), '增加 ' + pctFmt(Math.abs(p.v)) + '% 的结果'],
+    [pctFmt(down), '减少 ' + pctFmt(Math.abs(p.v)) + '% 的结果'],
+    [pctFmt(a.v * p.v / 100), '变化量'],
+    [pctFmt(p.v) + '%', '输入的百分比']
+  ];
+  stats.innerHTML = items.map(function (it) {
+    return '<div class="stat-item"><div class="stat-num" style="font-size:16px">' + it[0] + '</div><div class="stat-label">' + it[1] + '</div></div>';
+  }).join('');
+}
+</script>
+</body>
+</html>

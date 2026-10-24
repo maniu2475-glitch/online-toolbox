@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>在线工具箱 - JSON格式化、Base64、二维码、密码生成等免费在线小工具</title>
-<meta name="description" content="免费在线工具箱：JSON格式化校验、Base64编解码、URL编解码、二维码生成、密码生成器、时间戳转换、颜色转换配色、Markdown预览、字数统计、MD5哈希、IP查询、进制转换、单位换算、JWT解码。纯前端运行，数据不上传，安全快速。">
-<meta name="keywords" content="在线工具,JSON格式化,JSON校验,Base64编码,URL编码,二维码生成,密码生成器,时间戳转换,Unix时间戳,颜色转换,配色方案,Markdown预览,字数统计,免费工具">
+<meta name="description" content="免费在线工具箱：JSON格式化校验、Base64编解码、URL编解码、二维码生成、密码生成器、时间戳转换、颜色转换配色、Markdown预览、字数统计、MD5哈希、IP查询、进制转换、单位换算、JWT解码、BMI计算器、年龄计算器、百分比计算器、正则测试器、chmod权限计算器。纯前端运行，数据不上传，安全快速。">
+<meta name="keywords" content="在线工具,JSON格式化,JSON校验,Base64编码,URL编码,二维码生成,密码生成器,时间戳转换,Unix时间戳,颜色转换,配色方案,Markdown预览,字数统计,BMI计算器,年龄计算器,百分比计算器,正则测试,chmod权限计算,免费工具">
 <meta name="author" content="ToolBox">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#4f6ef7">
@@ -16,7 +16,7 @@
 <!-- Open Graph / SEO -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="在线工具箱 - 免费在线小工具合集">
-<meta property="og:description" content="JSON格式化、Base64、二维码、密码生成、时间戳转换等18款免费在线工具，纯前端运行，数据不上传。">
+<meta property="og:description" content="JSON格式化、Base64、二维码、密码生成、时间戳转换等23款免费在线工具，纯前端运行，数据不上传。">
 <meta property="og:locale" content="zh_CN">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
@@ -69,7 +69,7 @@
     <!-- 首页简介 -->
     <section class="tool-panel active" id="tool-home">
       <h1>免费在线工具箱</h1>
-      <p class="intro">18 款常用在线小工具，纯浏览器本地运行，<strong>数据不上传服务器</strong>，安全、快速、免费。</p>
+      <p class="intro">23 款常用在线小工具，纯浏览器本地运行，<strong>数据不上传服务器</strong>，安全、快速、免费。</p>
       <div class="home-grid">
         <a class="home-card" href="#tool-json"><div class="hc-icon">🧩</div><div class="hc-title">JSON 格式化/校验</div><div class="hc-desc">格式化、压缩、校验错误行号</div></a>
         <a class="home-card" href="#tool-base64"><div class="hc-icon">🔠</div><div class="hc-title">Base64 编解码</div><div class="hc-desc">支持中文与任意文本</div></a>
@@ -89,6 +89,11 @@
         <a class="home-card" href="#tool-csv"><div class="hc-icon">📄</div><div class="hc-title">CSV 转 JSON</div><div class="hc-desc">支持自定义分隔符</div></a>
         <a class="home-card" href="#tool-uuid"><div class="hc-icon">🆔</div><div class="hc-title">UUID 生成器</div><div class="hc-desc">批量生成 UUID v4</div></a>
         <a class="home-card" href="#tool-jwt"><div class="hc-icon">🔑</div><div class="hc-title">JWT 解码</div><div class="hc-desc">解码 Header/Payload，本地运行</div></a>
+        <a class="home-card" href="bmi-calculator.html"><div class="hc-icon">⚖️</div><div class="hc-title">BMI 计算器</div><div class="hc-desc">身高体重算 BMI 与标准体重区间</div></a>
+        <a class="home-card" href="age-calculator.html"><div class="hc-icon">🎂</div><div class="hc-title">年龄计算器</div><div class="hc-desc">周岁、虚岁与下次生日倒计时</div></a>
+        <a class="home-card" href="percentage-calculator.html"><div class="hc-icon">📈</div><div class="hc-title">百分比计算器</div><div class="hc-desc">占比、涨跌幅、增减百分比</div></a>
+        <a class="home-card" href="regex-tester.html"><div class="hc-icon">🔍</div><div class="hc-title">正则测试器</div><div class="hc-desc">高亮匹配、统计数量、速查表</div></a>
+        <a class="home-card" href="chmod-calculator.html"><div class="hc-icon">🛡️</div><div class="hc-title">chmod 权限计算</div><div class="hc-desc">rwx 九宫格与 755 数字互转</div></a>
 
     </section>
 
@@ -387,8 +392,13 @@ console.log("代码块");
 <li><a href="text-sort.html">文本排序去重</a></li>
 <li><a href="csv-to-json.html">CSV转JSON</a></li>
 <li><a href="uuid-generator.html">UUID生成</a></li>
-<li><a href="jwt-decoder.html">JWT解码</a></li></ul></section>
-<h3 style="margin-top:24px">全部工具页面</h3><p class="footer-links" style="line-height:2"><a href="json-formatter.html">JSON格式化</a> · <a href="base64.html">Base64编解码</a> · <a href="url-encode-decode.html">URL编解码</a> · <a href="qr-code-generator.html">二维码生成</a> · <a href="password-generator.html">密码生成</a> · <a href="timestamp-converter.html">时间戳转换</a> · <a href="color-converter.html">颜色转换</a> · <a href="markdown-editor.html">Markdown预览</a> · <a href="word-counter.html">字数统计</a> · <a href="md5-generator.html">MD5哈希</a> · <a href="ip-lookup.html">IP查询</a> · <a href="number-converter.html">进制转换</a> · <a href="unit-converter.html">单位换算</a> · <a href="case-converter.html">大小写转换</a> · <a href="text-sort.html">文本排序去重</a> · <a href="csv-to-json.html">CSV转JSON</a> · <a href="uuid-generator.html">UUID生成</a> · <a href="jwt-decoder.html">JWT解码</a></p>
+<li><a href="jwt-decoder.html">JWT解码</a></li>
+<li><a href="bmi-calculator.html">BMI计算器</a></li>
+<li><a href="age-calculator.html">年龄计算器</a></li>
+<li><a href="percentage-calculator.html">百分比计算器</a></li>
+<li><a href="regex-tester.html">正则测试器</a></li>
+<li><a href="chmod-calculator.html">chmod权限计算</a></li></ul></section>
+<h3 style="margin-top:24px">全部工具页面</h3><p class="footer-links" style="line-height:2"><a href="json-formatter.html">JSON格式化</a> · <a href="base64.html">Base64编解码</a> · <a href="url-encode-decode.html">URL编解码</a> · <a href="qr-code-generator.html">二维码生成</a> · <a href="password-generator.html">密码生成</a> · <a href="timestamp-converter.html">时间戳转换</a> · <a href="color-converter.html">颜色转换</a> · <a href="markdown-editor.html">Markdown预览</a> · <a href="word-counter.html">字数统计</a> · <a href="md5-generator.html">MD5哈希</a> · <a href="ip-lookup.html">IP查询</a> · <a href="number-converter.html">进制转换</a> · <a href="unit-converter.html">单位换算</a> · <a href="case-converter.html">大小写转换</a> · <a href="text-sort.html">文本排序去重</a> · <a href="csv-to-json.html">CSV转JSON</a> · <a href="uuid-generator.html">UUID生成</a> · <a href="jwt-decoder.html">JWT解码</a> · <a href="bmi-calculator.html">BMI计算器</a> · <a href="age-calculator.html">年龄计算器</a> · <a href="percentage-calculator.html">百分比计算器</a> · <a href="regex-tester.html">正则测试器</a> · <a href="chmod-calculator.html">chmod权限计算</a></p>
 </main>
 
   <!-- ===== 侧边栏广告位 ===== -->

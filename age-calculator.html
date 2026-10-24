@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>年龄计算器 在线 - 周岁虚岁、下次生日倒计时与星座</title>
+<meta name="description" content="免费在线年龄计算器：输入出生日期，立即算出周岁、虚岁、已经生活的天数、下次生日倒计时和星座。纯浏览器本地计算，无需登录，出生日期不上传。">
+<meta name="keywords" content="年龄计算器 周岁虚岁,出生日期算年龄,生日倒计时,星座查询,虚岁怎么算,周岁计算">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/online-toolbox/age-calculator.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="年龄计算器 周岁虚岁">
+<meta property="og:description" content="输入出生日期，算出周岁、虚岁、下次生日倒计时与星座。免费、本地计算、无需登录。">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "年龄计算器", "url": "https://maniu2475-glitch.github.io/online-toolbox/age-calculator.html", "description": "免费在线年龄计算器：输入出生日期，立即算出周岁、虚岁、已经生活的天数、下次生日倒计时和星座。", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "周岁和虚岁有什么区别？", "acceptedAnswer": {"@type": "Answer", "text": "周岁是每过一个出生周年才增加一岁，按公历生日计算；虚岁出生即算一岁，之后每过一个农历春节增加一岁，所以通常会比周岁大一到两岁。"}}, {"@type": "Question", "name": "2 月 29 日出生，平年怎么算生日？", "acceptedAnswer": {"@type": "Answer", "text": "本工具在平年把 2 月 29 日的生日顺延到 3 月 1 日计算倒计时，周岁仍按出生周年判断。"}}, {"@type": "Question", "name": "出生日期会被保存或上传吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。日期只在浏览器本地参与计算，不发送任何请求，关闭页面后不会保留。"}}]}</script></head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">在线工具箱</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">二维码</a>
+      <a href="index.html#tool-password" data-tool="password">密码</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">时间戳</a>
+      <a href="index.html#tool-color" data-tool="color">颜色</a>
+      <a href="index.html#tool-markdown" data-tool="markdown">Markdown</a>
+      <a href="index.html#tool-counter" data-tool="counter">字数</a>
+      <a href="index.html#tool-hash" data-tool="hash">哈希</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP查询</a>
+      <a href="index.html#tool-radix" data-tool="radix">进制转换</a>
+      <a href="index.html#tool-unit" data-tool="unit">单位换算</a>
+      <a href="index.html#tool-case" data-tool="case">大小写</a>
+      <a href="index.html#tool-textsort" data-tool="textsort">文本处理</a>
+      <a href="index.html#tool-csv" data-tool="csv">CSV转JSON</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-jwt" data-tool="jwt">JWT解码</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-age">
+      <h1>年龄计算器（周岁 / 虚岁）</h1>
+
+      <p class="tool-desc">选择出生日期，计算周岁、虚岁、已生活天数、下次生日倒计时与星座。</p>
+      <div class="form-row">
+        <label>出生日期：<input type="date" id="age-date" style="width:180px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:#fafbfc" onchange="ageCalc(false)"></label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="ageCalc(true)">计算年龄</button>
+        <button class="btn btn-outline" onclick="ageReset()">清空</button>
+      </div>
+      <div class="result-box" id="age-out">请选择出生日期后点击「计算年龄」</div>
+      <div class="stat-grid" id="age-stats"></div>
+
+      <hr>
+      <h2>关于年龄计算器</h2>
+      <p style="line-height:1.9">这个工具用来回答生活里最常被问到的几个问题：我现在到底几周岁？虚岁是多少？距离下一次生日还有多少天？出生那天对应什么星座？在出生日期框里选好年月日，结果会立刻显示，也可以点「计算年龄」按钮。日期为空、格式不完整或晚于今天时，页面会明确提示，不会给出错误结论。整个计算过程在浏览器本地完成，出生日期属于比较私人的信息，本工具不会把它发送或保存到任何地方。</p>
+      <h3>周岁、虚岁与天数的口径</h3>
+      <p style="line-height:1.9">周岁按公历生日计算：只有过了当年的生日，年龄才加一岁，没过生日就仍按上一岁算，这也是办理入学、入职、证件时通常采用的口径。虚岁是传统说法，出生即算一岁，此后每过一个农历春节加一岁，本页按“当前公历年份减出生年份再加一”估算，所以在春节前后可能与长辈说的虚岁相差一岁。已生活天数按两个日期之间的实际天数计算，包含闰年多出的 2 月 29 日；如果你只需要周岁，看第一项即可。</p>
+      <h3>生日倒计时与星座边界</h3>
+      <p style="line-height:1.9">下次生日倒计时以今天为零点，计算到下一个生日当天的天数，如果今天正好是生日会显示 0 天。2 月 29 日出生的人在平年没有对应日期，本工具顺延到 3 月 1 日。星座按公历日期划分，边界日期（例如 3 月 21 日、12 月 22 日）在不同资料中可能有一天的差异，页面采用常见的西方星座分界。以上结果均为日常参考，正式场合的年龄认定请以身份证件和相关部门的口径为准。</p>
+      <h3>相关工具</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <a class="btn btn-outline" href="bmi-calculator.html">BMI 计算器</a>
+        <a class="btn btn-outline" href="timestamp-converter.html">时间戳转换</a>
+        <a class="btn btn-outline" href="percentage-calculator.html">百分比计算器</a>
+        <a class="btn btn-outline" href="unit-converter.html">单位换算</a>
+        <a class="btn btn-outline" href="word-counter.html">字数统计</a>
+        <a class="btn btn-outline" href="index.html#home">全部工具</a>
+      </div>
+      <h3>常见问题</h3>
+      <div style="line-height:1.9">
+        <details><summary><strong>周岁和虚岁有什么区别？</strong></summary><p>周岁是每过一个出生周年才增加一岁，按公历生日计算；虚岁出生即算一岁，之后每过一个农历春节增加一岁，所以通常会比周岁大一到两岁。</p></details>
+        <details><summary><strong>2 月 29 日出生，平年怎么算生日？</strong></summary><p>本工具在平年把 2 月 29 日的生日顺延到 3 月 1 日计算倒计时，周岁仍按出生周年判断。</p></details>
+        <details><summary><strong>出生日期会被保存或上传吗？</strong></summary><p>不会。日期只在浏览器本地参与计算，不发送任何请求，关闭页面后不会保留。</p></details>
+      </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 在线工具箱</p><p class="footer-links"><a href="index.html#home">🧰 在线工具箱</a></p></div></footer>
+<script src="app.js"></script>
+<script>
+const SIGN_CUTS = [[1, 20, '水瓶座'], [2, 19, '双鱼座'], [3, 21, '白羊座'], [4, 20, '金牛座'], [5, 21, '双子座'], [6, 22, '巨蟹座'], [7, 23, '狮子座'], [8, 23, '处女座'], [9, 23, '天秤座'], [10, 24, '天蝎座'], [11, 23, '射手座'], [12, 22, '摩羯座']];
+const ANIMALS = ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪'];
+
+function zodiacOf(m, d) {
+  let sign = '摩羯座';
+  for (let i = 0; i < SIGN_CUTS.length; i++) {
+    const c = SIGN_CUTS[i];
+    if (m > c[0] || (m === c[0] && d >= c[1])) sign = c[2];
+    else break;
+  }
+  return sign;
+}
+function animalOf(year) {
+  return ANIMALS[((year - 1900) % 12 + 12) % 12];
+}
+function ageReset() {
+  document.getElementById('age-date').value = '';
+  document.getElementById('age-stats').innerHTML = '';
+  document.getElementById('age-out').textContent = '请选择出生日期后点击「计算年龄」';
+}
+function ageCalc(strict) {
+  const out = document.getElementById('age-out');
+  const stats = document.getElementById('age-stats');
+  const raw = document.getElementById('age-date').value;
+  stats.innerHTML = '';
+  if (!raw) {
+    if (strict) out.textContent = '❌ 请先选择出生日期';
+    return;
+  }
+  const parts = raw.split('-');
+  if (parts.length !== 3) {
+    out.textContent = '❌ 日期格式不正确，请重新选择';
+    return;
+  }
+  const y = parseInt(parts[0], 10), mo = parseInt(parts[1], 10), da = parseInt(parts[2], 10);
+  const birth = new Date(y, mo - 1, da);
+  if (birth.getFullYear() !== y || birth.getMonth() !== mo - 1 || birth.getDate() !== da) {
+    out.textContent = '❌ 这个日期不存在，请检查年月日';
+    return;
+  }
+  if (y < 1900) {
+    out.textContent = '❌ 请输入 1900 年之后的出生日期';
+    return;
+  }
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  if (birth > today) {
+    out.textContent = '❌ 出生日期不能晚于今天';
+    return;
+  }
+  let years = today.getFullYear() - y;
+  const hadBirthday = (today.getMonth() > birth.getMonth()) || (today.getMonth() === birth.getMonth() && today.getDate() >= birth.getDate());
+  if (!hadBirthday) years--;
+  const nominal = today.getFullYear() - y + 1;
+
+  let next = new Date(today.getFullYear(), birth.getMonth(), birth.getDate());
+  if (next.getMonth() !== birth.getMonth()) next = new Date(today.getFullYear(), birth.getMonth() + 1, 1);
+  if (next < today) {
+    next = new Date(today.getFullYear() + 1, birth.getMonth(), birth.getDate());
+    if (next.getMonth() !== birth.getMonth()) next = new Date(today.getFullYear() + 1, birth.getMonth() + 1, 1);
+  }
+  const daysLeft = Math.round((next - today) / 86400000);
+  const lived = Math.floor((today - birth) / 86400000);
+
+  out.innerHTML = '<strong style="font-size:22px;color:#4f6ef7">' + years + ' 周岁</strong>'
+    + '<div style="margin-top:8px">出生日期：' + y + ' 年 ' + mo + ' 月 ' + da + ' 日</div>'
+    + '<div>下次生日：' + next.getFullYear() + ' 年 ' + (next.getMonth() + 1) + ' 月 ' + next.getDate() + ' 日'
+    + (daysLeft === 0 ? '（就是今天）' : '（还有 ' + daysLeft + ' 天）') + '</div>';
+
+  const items = [
+    [years + ' 岁', '周岁'],
+    [nominal + ' 岁', '虚岁（按年份计）'],
+    [daysLeft + ' 天', '下次生日倒计时'],
+    [zodiacOf(mo, da), '星座'],
+    [lived.toLocaleString('zh-CN') + ' 天', '已生活天数'],
+    [animalOf(y), '生肖（参考）']
+  ];
+  stats.innerHTML = items.map(function (it) {
+    return '<div class="stat-item"><div class="stat-num" style="font-size:16px">' + it[0] + '</div><div class="stat-label">' + it[1] + '</div></div>';
+  }).join('');
+}
+</script>
+</body>
+</html>

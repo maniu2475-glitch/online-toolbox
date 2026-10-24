@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>正则表达式测试器 在线 - 高亮匹配、数量统计与速查表</title>
+<meta name="description" content="免费在线正则测试工具：输入正则表达式和文本，即时高亮所有匹配、统计匹配数量与位置，并内置手机号、邮箱、身份证、IP 等常用正则速查。纯浏览器本地运行，无需登录。">
+<meta name="keywords" content="正则表达式测试器 在线,正则匹配高亮,正则在线测试,常用正则大全,正则校验工具,regex tester">
+<meta name="author" content="ToolBox">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#4f6ef7">
+<meta name="google-site-verification" content="online-toolbox">
+<meta name="baidu-site-verification" content="online-toolbox">
+<link rel="canonical" href="https://maniu2475-glitch.github.io/online-toolbox/regex-tester.html">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<!-- Open Graph / SEO -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="正则表达式测试器">
+<meta property="og:description" content="输入正则和文本，即时高亮全部匹配、统计数量，含常用正则速查。免费本地运行。">
+<meta property="og:locale" content="zh_CN">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAn0lEQVR4nO3asQ2AMBCF0S9SAdqAsxVwJGACZjAUIAd8a7S0L/1/1r/HPn1vAmAAGIAJRWYAfwFVAdAA0ADQANAA0ADQAKAH+pwAFcBDwADwAHgAPADegAYAvQAXgBHYA7gAroAPwFegCnAAGIAGIAMYAL4BF9oD3T941acAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "正则表达式测试器", "url": "https://maniu2475-glitch.github.io/online-toolbox/regex-tester.html", "description": "免费在线正则测试工具：输入正则表达式和文本，即时高亮所有匹配、统计匹配数量与位置，并内置常用正则速查。", "applicationCategory": "DeveloperApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "browserRequirements": "Requires JavaScript"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "为什么同样的正则在这里能匹配，在代码里却匹配不到？", "acceptedAnswer": {"@type": "Answer", "text": "常见原因是代码里缺少全局标志 g，或者没有开启多行标志 m。本工具默认按全局方式高亮所有匹配，方便一次看全。"}}, {"@type": "Question", "name": "正则里的斜杠要不要写？", "acceptedAnswer": {"@type": "Answer", "text": "不需要。只填表达式本身即可，例如 ^\\d{6}$。如果从代码里复制了带首尾斜杠的形式，本工具也能识别并自动去掉。"}}, {"@type": "Question", "name": "测试的文本会被上传吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。匹配完全在浏览器内由 JavaScript 的正则引擎执行，页面不发送任何网络请求。"}}]}</script></head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="menu">☰</button>
+    <a class="logo" href="index.html#home"><span class="logo-icon">🧰</span><span class="logo-text">在线工具箱</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#tool-json" data-tool="json">JSON</a>
+      <a href="index.html#tool-base64" data-tool="base64">Base64</a>
+      <a href="index.html#tool-url" data-tool="url">URL</a>
+      <a href="index.html#tool-qrcode" data-tool="qrcode">二维码</a>
+      <a href="index.html#tool-password" data-tool="password">密码</a>
+      <a href="index.html#tool-timestamp" data-tool="timestamp">时间戳</a>
+      <a href="index.html#tool-color" data-tool="color">颜色</a>
+      <a href="index.html#tool-markdown" data-tool="markdown">Markdown</a>
+      <a href="index.html#tool-counter" data-tool="counter">字数</a>
+      <a href="index.html#tool-hash" data-tool="hash">哈希</a>
+      <a href="index.html#tool-ip" data-tool="ip">IP查询</a>
+      <a href="index.html#tool-radix" data-tool="radix">进制转换</a>
+      <a href="index.html#tool-unit" data-tool="unit">单位换算</a>
+      <a href="index.html#tool-case" data-tool="case">大小写</a>
+      <a href="index.html#tool-textsort" data-tool="textsort">文本处理</a>
+      <a href="index.html#tool-csv" data-tool="csv">CSV转JSON</a>
+      <a href="index.html#tool-uuid" data-tool="uuid">UUID</a>
+      <a href="index.html#tool-jwt" data-tool="jwt">JWT解码</a>
+    </nav>
+  </div>
+</header>
+<main class="content" id="content">
+  <section class="tool-panel active" id="tool-regex">
+      <h1>正则表达式测试器</h1>
+
+      <p class="tool-desc">输入正则表达式和待测文本，自动高亮全部匹配、统计匹配数量并列出每处的位置。默认按全局模式执行，可切换忽略大小写、多行和点号匹配换行。</p>
+      <input type="text" id="re-pattern" placeholder="正则表达式，例如：\d{11}（不需要首尾斜杠）" oninput="reTest(false)">
+      <div class="opt-group">
+        <label><input type="checkbox" id="re-i" onchange="reTest(false)"> 忽略大小写 i</label>
+        <label><input type="checkbox" id="re-m" onchange="reTest(false)"> 多行 m</label>
+        <label><input type="checkbox" id="re-s" onchange="reTest(false)"> 点号匹配换行 s</label>
+      </div>
+      <textarea id="re-text" rows="8" placeholder="在此粘贴要测试的文本" oninput="reTest(false)"></textarea>
+      <div class="btn-group">
+        <button class="btn" onclick="reTest(true)">开始测试</button>
+        <button class="btn btn-outline" onclick="reClear()">清空</button>
+      </div>
+      <div class="result-box" id="re-count">输入正则和文本后自动开始测试</div>
+      <pre id="re-highlight" class="output" style="white-space:pre-wrap;min-height:60px;max-height:360px"></pre>
+      <h3>匹配明细</h3>
+      <div class="result-box" id="re-list" style="font-size:13px;line-height:1.8">暂无匹配结果</div>
+
+      <hr>
+      <h2>关于正则测试器</h2>
+      <p style="line-height:1.9">写正则最怕两件事：表达式看着对却匹配不到，或者匹配到了却不是想要的范围。这个工具把输入框、测试文本和高亮结果放在同一屏：在第一个输入框写表达式，下面粘贴一段真实文本，页面会立即用浏览器自带的 JavaScript 正则引擎跑一遍，把所有命中的片段用底色标出来，同时告诉你一共找到几处、每一处的起止位置和实际内容。它不需要安装任何环境，也不用把数据贴到第三方接口，适合临时验证手机号、邮箱、日期、日志行等格式，确认无误后再复制到代码里使用。</p>
+      <h3>标志位与匹配规则说明</h3>
+      <p style="line-height:1.9">本工具默认以全局模式（g）执行，因此能看到全部匹配，而不是只返回第一个。勾选“忽略大小写 i”后，A 与 a 视为相同；勾选“多行 m”后，^ 和 $ 会匹配每一行的开头和结尾，适合逐行校验；勾选“点号匹配换行 s”后，英文句点可以跨过换行符。表达式只填内容本身，不要加首尾斜杠；如果从代码里复制了 /表达式/gi 这种形式，页面也会自动识别并拆出标志位。需要注意，正则默认是贪婪匹配，像 .* 会尽可能吃得多，必要时用 .*? 改为非贪婪；另外复杂的嵌套量词可能触发大量回溯，文本很长时请尽量写得具体。</p>
+      <h3>常见用途与注意事项</h3>
+      <p style="line-height:1.9">日常最常用的场景是表单校验：手机号是否为 1 开头的 11 位数字、邮箱是否包含 @ 和域名、身份证是否 18 位、IPv4 每段是否在 0 到 255 之间。做校验时建议加上 ^ 和 $，否则只要文本中任意一段符合就会判为匹配，容易放过错误输入。处理中文时要注意字符范围，[\u4e00-\u9fa5] 覆盖常用汉字但不包含生僻字和扩展区；处理多行日志时通常需要 m 标志。最后提醒，正则适合做格式判断，不适合做语义校验，例如日期 2026-02-31 能通过格式正则，但仍需再用日期逻辑判断是否真实存在。</p>
+      <h3>常用正则速查</h3>
+      <div id="re-presets"></div>
+      <h3>相关工具</h3>
+      <div class="btn-group" style="flex-wrap:wrap">
+        <a class="btn btn-outline" href="json-formatter.html">JSON 格式化</a>
+        <a class="btn btn-outline" href="text-sort.html">文本排序去重</a>
+        <a class="btn btn-outline" href="case-converter.html">大小写转换</a>
+        <a class="btn btn-outline" href="url-encode-decode.html">URL 编解码</a>
+        <a class="btn btn-outline" href="word-counter.html">字数统计</a>
+        <a class="btn btn-outline" href="index.html#home">全部工具</a>
+      </div>
+      <h3>常见问题</h3>
+      <div style="line-height:1.9">
+        <details><summary><strong>为什么同样的正则在这里能匹配，在代码里却匹配不到？</strong></summary><p>常见原因是代码里缺少全局标志 g，或者没有开启多行标志 m。本工具默认按全局方式高亮所有匹配，方便一次看全。</p></details>
+        <details><summary><strong>正则里的斜杠要不要写？</strong></summary><p>不需要。只填表达式本身即可，例如 ^\d{6}$。如果从代码里复制了带首尾斜杠的形式，本工具也能识别并自动去掉。</p></details>
+        <details><summary><strong>测试的文本会被上传吗？</strong></summary><p>不会。匹配完全在浏览器内由 JavaScript 的正则引擎执行，页面不发送任何网络请求。</p></details>
+      </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="container"><p>© 2025 在线工具箱</p><p class="footer-links"><a href="index.html#home">🧰 在线工具箱</a></p></div></footer>
+<script src="app.js"></script>
+<script>
+const PRESETS = [
+  { name: '手机号', pattern: '^1[3-9]\\d{9}$', tip: '中国大陆 11 位手机号' },
+  { name: '邮箱', pattern: '^[\\w.+-]+@[\\w-]+(\\.[\\w-]+)+$', tip: '常规邮箱地址' },
+  { name: '身份证号', pattern: '^\\d{17}[\\dXx]$', tip: '18 位身份证（含末位 X）' },
+  { name: '网址', pattern: '^https?://[^\\s]+$', tip: 'http 或 https 开头的链接' },
+  { name: 'IPv4', pattern: '^((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)$', tip: '每段 0 至 255' },
+  { name: '日期', pattern: '^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$', tip: 'YYYY-MM-DD 格式' },
+  { name: '中文', pattern: '[\\u4e00-\\u9fa5]+', tip: '连续的中文汉字' },
+  { name: 'HTML 标签', pattern: '</?[a-zA-Z][^>]*>', tip: '匹配开始或结束标签' },
+  { name: '数字', pattern: '-?\\d+(\\.\\d+)?', tip: '整数或小数，可带负号' }
+];
+
+function reEsc(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function reFlags(extra) {
+  const set = new Set(['g']);
+  if (document.getElementById('re-i').checked) set.add('i');
+  if (document.getElementById('re-m').checked) set.add('m');
+  if (document.getElementById('re-s').checked) set.add('s');
+  for (let i = 0; i < extra.length; i++) {
+    if ('imsu'.indexOf(extra[i]) >= 0) set.add(extra[i]);
+  }
+  return Array.from(set).join('');
+}
+function reRenderPresets() {
+  const box = document.getElementById('re-presets');
+  box.innerHTML = PRESETS.map(function (p, i) {
+    return '<div class="form-row" style="margin-bottom:8px">'
+      + '<button class="btn btn-outline" style="padding:6px 12px;min-width:96px" onclick="reUse(' + i + ')">' + p.name + '</button>'
+      + '<code style="font-size:13px;word-break:break-all">' + reEsc(p.pattern) + '</code>'
+      + '<span class="tool-desc" style="margin:0">' + p.tip + '</span></div>';
+  }).join('');
+}
+function reUse(i) {
+  const p = PRESETS[i];
+  document.getElementById('re-pattern').value = p.pattern;
+  reTest(true);
+}
+function reClear() {
+  document.getElementById('re-pattern').value = '';
+  document.getElementById('re-text').value = '';
+  document.getElementById('re-count').textContent = '输入正则和文本后自动开始测试';
+  document.getElementById('re-highlight').textContent = '';
+  document.getElementById('re-list').textContent = '暂无匹配结果';
+}
+function reTest(strict) {
+  const patEl = document.getElementById('re-pattern');
+  const textEl = document.getElementById('re-text');
+  const countOut = document.getElementById('re-count');
+  const hiOut = document.getElementById('re-highlight');
+  const listOut = document.getElementById('re-list');
+  const rawPat = patEl.value;
+  const text = textEl.value;
+
+  if (!rawPat.trim()) {
+    if (strict) countOut.textContent = '❌ 请先输入正则表达式';
+    return;
+  }
+  if (!text) {
+    if (strict) countOut.textContent = '❌ 请先输入要测试的文本';
+    return;
+  }
+  if (text.length > 200000) {
+    countOut.textContent = '❌ 文本超过 20 万个字符，请分段测试';
+    return;
+  }
+  let source = rawPat;
+  let extra = '';
+  const slashForm = rawPat.match(/^\/([\s\S]+)\/([gimsuy]*)$/);
+  if (slashForm) { source = slashForm[1]; extra = slashForm[2]; }
+
+  let re;
+  try {
+    re = new RegExp(source, reFlags(extra));
+  } catch (e) {
+    countOut.textContent = '❌ 正则语法错误：' + e.message;
+    hiOut.textContent = '';
+    listOut.textContent = '正则无法编译，暂无结果';
+    return;
+  }
+
+  let m, count = 0, guard = 0;
+  const ranges = [];
+  const details = [];
+  while ((m = re.exec(text)) !== null) {
+    count++;
+    if (m[0].length > 0) {
+      ranges.push([m.index, m.index + m[0].length]);
+      if (details.length < 100) {
+        let shown = m[0].length > 60 ? m[0].slice(0, 60) + '…' : m[0];
+        let line = '第 ' + count + ' 处：位置 ' + m.index + '–' + (m.index + m[0].length) + '，内容「' + reEsc(shown) + '」';
+        if (m.length > 1) {
+          const groups = [];
+          for (let g = 1; g < m.length; g++) groups.push(m[g] === undefined ? '(未参与)' : m[g]);
+          line += '，捕获组：' + groups.map(function (x) { return '「' + reEsc(x) + '」'; }).join(' ');
+        }
+        details.push(line);
+      }
+    } else {
+      re.lastIndex++;
+    }
+    if (++guard >= 5000) break;
+  }
+
+  if (count === 0) {
+    countOut.innerHTML = '<strong style="color:#6a737d">没有找到匹配</strong>，可以检查表达式、标志位或文本内容';
+  } else {
+    countOut.innerHTML = '<strong style="color:#4f6ef7">共找到 ' + count + ' 处匹配</strong>'
+      + (guard >= 5000 ? '（已达到 5000 处上限，仅统计前 5000 处）' : '');
+  }
+
+  let html = '', pos = 0;
+  for (let i = 0; i < ranges.length; i++) {
+    const s = ranges[i][0], e = ranges[i][1];
+    html += reEsc(text.slice(pos, s)) + '<mark style="background:#f9e2af;color:#1e1e2e;border-radius:3px">' + reEsc(text.slice(s, e)) + '</mark>';
+    pos = e;
+  }
+  html += reEsc(text.slice(pos));
+  hiOut.innerHTML = html;
+
+  if (details.length === 0) {
+    listOut.textContent = '没有可展示的匹配内容（零长度匹配不参与高亮）';
+  } else {
+    listOut.innerHTML = details.join('<br>')
+      + (count > details.length ? '<br>…… 其余 ' + (count - details.length) + ' 处未展开' : '');
+  }
+}
+reRenderPresets();
+</script>
+</body>
+</html>
