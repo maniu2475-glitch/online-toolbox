@@ -106,7 +106,7 @@ MIT
 
 ## 🌍 英文站（同步运营）
 
-英文站 <https://maniu2475-glitch.github.io/tools-en/> 共 **43 个工具**（2026-10-24），包括：
+英文站 <https://maniu2475-glitch.github.io/tools-en/> 共 **48 个工具**（2026-10-24），包括：
 
 - JSON/Base64/URL 编解码、二维码生成与扫描、密码生成与强度检查
 - 时间戳、颜色转换与取色器、Markdown、字数统计、哈希、IP、进制、单位、大小写
@@ -114,3 +114,4 @@ MIT
 - Cron 解析与生成器、宽高比计算、随机字符串、Slug、HTML 实体、图片转 Base64、Lorem Ipsum、URL 解析
 - 计算器类：百分比、BMI、年龄、贷款月供、复利、折扣、随机数
 - 开发工具：chmod 权限计算、正则测试、温度换算
+- 新增（2026-10-24）：JSON to CSV、SHA-256 哈希生成、去重复行、CSS 压缩、XML 格式化校验
