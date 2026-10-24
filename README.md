@@ -2,7 +2,9 @@
 
 一个纯前端的免费在线小工具集合网站，可部署到 **GitHub Pages**，挂载 Google AdSense 广告实现被动收入。
 
-## ✨ 功能（23 个工具）
+## ✨ 功能（中文站 23 个工具）
+
+> 另有英文站（tools-en，83 个工具）：https://maniu2475-glitch.github.io/tools-en/
 
 | 工具 | 说明 |
 |------|------|
