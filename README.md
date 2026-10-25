@@ -4,7 +4,7 @@
 
 ## ✨ 功能（中文站 23 个工具）
 
-> 另有英文站（tools-en，108 个工具）：https://maniu2475-glitch.github.io/tools-en/
+> 另有英文站（tools-en，110 个工具）：https://maniu2475-glitch.github.io/tools-en/
 
 | 工具 | 说明 |
 |------|------|
@@ -37,6 +37,16 @@
 - 响应式设计，完美支持手机端
 - SEO 友好：meta title/description/keywords、Open Graph、语义化标签
 - 预留 4 处广告位（顶部 Banner、侧边栏 300x250、侧边栏 300x600、底部 Banner）
+
+## 🛠️ 英文站新增（第 9 批，2026-10-25）
+
+| 工具 | 说明 |
+|------|------|
+| Cm to Feet & Inches Converter | 厘米 ↔ 英尺英寸双向转换 + 速查表 |
+| Kg to Pounds Converter | 千克 ↔ 磅/盎司双向转换 + 邻近对照表 |
+| Savings Goal Calculator | 储蓄目标：多久达成 / 每月需存多少（复利模拟） |
+| Time Card Calculator | 打卡工时计算：跨夜班、扣午休、时薪算周薪 |
+| Area Converter | 平方米/平方英尺/英亩/公顷等 7 种面积单位互转 |
 
 ## 📁 目录结构
 
