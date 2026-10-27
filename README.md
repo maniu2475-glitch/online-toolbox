@@ -4,7 +4,7 @@
 
 ## ✨ 功能（中文站 23 个工具）
 
-> 另有英文站（tools-en，120 个工具）：https://maniu2475-glitch.github.io/tools-en/
+> 另有英文站（tools-en，125 个工具）：https://maniu2475-glitch.github.io/tools-en/
 
 | 工具 | 说明 |
 |------|------|
