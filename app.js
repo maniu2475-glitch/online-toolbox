@@ -323,19 +323,42 @@ async function hashCompute() {
 /* IP 查询 */
 async function ipLookup() {
   const out = document.getElementById('ip-out');
+  if (!out) return;
   out.textContent = '查询中…';
-  try {
-    const r = await fetch('https://ipapi.co/json/');
-    const d = await r.json();
-    out.textContent = '您的 IP：' + d.ip + '\n归属地：' + (d.country_name || '') + ' ' + (d.region || '') + ' ' + (d.city || '') +
-      '\n运营商/组织：' + (d.org || '未知') + '\n时区：' + (d.timezone || '未知');
-  } catch (e) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 8000);
+  // 按顺序尝试多个上游，任一成功即返回
+  const apis = [
+    {
+      url: 'https://ipinfo.io/json',
+      parse: (d) => '您的 IP：' + d.ip + '\n归属地：' + (d.country || '') + ' ' + (d.region || '') + ' ' + (d.city || '') +
+        '\n运营商/组织：' + (d.org || '未知') + '\n时区：' + (d.timezone || '未知')
+    },
+    {
+      url: 'https://whois.pconline.com.cn/ipJson.jsp?json=true',
+      parse: (d) => '您的 IP：' + d.ip + '\n归属地：' + (d.pro || '') + ' ' + (d.city || '') +
+        '\n运营商/组织：' + (d.addr || '未知')
+    },
+    {
+      url: 'https://api.ipify.org?format=json',
+      parse: (d) => '您的 IP：' + d.ip + '\n（仅获取到 IP，归属地查询接口暂不可用）'
+    }
+  ];
+  for (const api of apis) {
     try {
-      const r2 = await fetch('https://ip.useragentinfo.com/json');
-      const d2 = await r2.json();
-      out.textContent = '您的 IP：' + d2.ip + '\n归属地：' + d2.province + ' ' + d2.city + ' ' + (d2.isp || '');
-    } catch (e2) { out.textContent = '❌ 查询失败，请稍后重试'; }
+      const r = await fetch(api.url, { signal: ctrl.signal });
+      if (!r.ok) continue;
+      const d = await r.json();
+      clearTimeout(timer);
+      out.textContent = api.parse(d);
+      out.style.whiteSpace = 'pre-wrap';
+      return;
+    } catch (e) {
+      // 继续尝试下一个
+    }
   }
+  clearTimeout(timer);
+  out.textContent = '❌ 查询失败，请稍后重试（所有上游接口均不可用）';
   out.style.whiteSpace = 'pre-wrap';
 }
 
@@ -360,23 +383,43 @@ const UNITS = {
   area: [['平方厘米 (cm²)', 1], ['平方米 (m²)', 1e4], ['平方千米 (km²)', 1e10], ['公顷 (ha)', 1e8], ['英亩 (acre)', 4.047e7]]
 };
 function unitChangeCat() {
-  const cat = document.getElementById('unit-cat').value;
+  const catEl = document.getElementById('unit-cat');
+  if (!catEl) return;
+  let cat = catEl.value;
+  if (!cat || !UNITS[cat]) {
+    // 兼容：浏览器/jsdom 未自动选中首项时回退到第一个类别
+    cat = Object.keys(UNITS)[0];
+    if (catEl.options.length > 0) catEl.selectedIndex = 0;
+  }
   const list = UNITS[cat];
+  if (!list) return;
   const from = document.getElementById('unit-from');
   const to = document.getElementById('unit-to');
+  if (!from || !to) return;
   from.innerHTML = list.map((u, i) => '<option value="' + i + '">' + u[0] + '</option>').join('');
   to.innerHTML = from.innerHTML;
   from.selectedIndex = 0; to.selectedIndex = Math.min(1, list.length - 1);
   unitConvert();
 }
 function unitConvert() {
-  const cat = document.getElementById('unit-cat').value;
+  const catEl = document.getElementById('unit-cat');
+  if (!catEl) return;
+  let cat = catEl.value;
+  if (!cat || !UNITS[cat]) { cat = Object.keys(UNITS)[0]; }
   const list = UNITS[cat];
+  if (!list) return;
   const v = parseFloat(document.getElementById('unit-val').value);
   const out = document.getElementById('unit-out');
   if (isNaN(v)) { out.textContent = ''; return; }
-  const f = list[+document.getElementById('unit-from').value];
-  const t = list[+document.getElementById('unit-to').value];
+  const fromEl = document.getElementById('unit-from');
+  const toEl = document.getElementById('unit-to');
+  // 如果下拉框还没被填充（unitChangeCat 未跑），先填充
+  if (!fromEl || fromEl.options.length === 0) { unitChangeCat(); return; }
+  const fi = Math.min(+fromEl.value || 0, list.length - 1);
+  const ti = Math.min(+toEl.value || 0, list.length - 1);
+  const f = list[fi];
+  const t = list[ti];
+  if (!f || !t) return;
   if (cat === 'temp') {
     // 先换算回摄氏度再转到目标
     let c = f[2] === 0 ? v : (v + f[2]) * f[1];
@@ -387,7 +430,11 @@ function unitConvert() {
     out.textContent = v + ' ' + f[0] + ' = ' + +(base / t[1]).toPrecision(8) + ' ' + t[0];
   }
 }
-document.addEventListener('DOMContentLoaded', unitChangeCat);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', unitChangeCat);
+} else {
+  unitChangeCat();
+}
 
 /* 大小写 */
 function caseDo(mode) {

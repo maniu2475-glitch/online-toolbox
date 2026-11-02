@@ -136,7 +136,9 @@ function reRenderPresets() {
   }).join('');
 }
 function reUse(i) {
+  if (i === undefined || i === null || i < 0 || i >= PRESETS.length) return;
   const p = PRESETS[i];
+  if (!p) return;
   document.getElementById('re-pattern').value = p.pattern;
   reTest(true);
 }
