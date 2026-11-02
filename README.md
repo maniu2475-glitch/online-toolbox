@@ -4,7 +4,7 @@
 
 ## ✨ 功能（中文站 23 个工具）
 
-> 另有英文站（tools-en，130 个工具）：https://maniu2475-glitch.github.io/tools-en/
+> 另有英文站（tools-en，135 个工具）：https://maniu2475-glitch.github.io/tools-en/
 
 | 工具 | 说明 |
 |------|------|
@@ -145,3 +145,15 @@ MIT
 ## 🌐 英文站
 
 英文站 [tools-en](https://github.com/maniu2475-glitch/tools-en) 现有 **68 个工具**。2026-10-24 三批新增：日期差计算、罗马数字转换、小费计算、VAT 计算、配速计算；Code 128 条形码生成器、ROT13/凯撒密码、摩尔斯电码翻译、数字转英文单词、Hex 转文本；Text Reverser、JSON to YAML、JS Minifier、GPA Calculator、Random Letter Generator。均已提交 sitemap 与 IndexNow（70 URL）。
+
+## 更新（2026-11-02）
+
+英文站新增 5 个工具页面（现共 135 个独立页面 + 首页）：
+
+- [Fahrenheit to Celsius Converter](https://maniu2475-glitch.github.io/tools-en/fahrenheit-to-celsius.html)
+- [Base58 Encoder / Decoder](https://maniu2475-glitch.github.io/tools-en/base58-encoder-decoder.html)
+- [Rounding Calculator](https://maniu2475-glitch.github.io/tools-en/rounding-calculator.html)
+- [Mean, Median & Mode Calculator](https://maniu2475-glitch.github.io/tools-en/mean-median-mode-calculator.html)
+- [Cm to Inches Converter](https://maniu2475-glitch.github.io/tools-en/cm-to-inches.html)
+
+均含独立 title/description/canonical、FAQ、相关工具内链；sitemap 已更新至 140 URL，IndexNow 已重新提交（HTTP 202）。
