@@ -4,7 +4,7 @@
 
 ## ✨ 功能（中文站 23 个工具）
 
-> 另有英文站（tools-en，125 个工具）：https://maniu2475-glitch.github.io/tools-en/
+> 另有英文站（tools-en，130 个工具）：https://maniu2475-glitch.github.io/tools-en/
 
 | 工具 | 说明 |
 |------|------|
@@ -47,6 +47,16 @@
 | Savings Goal Calculator | 储蓄目标：多久达成 / 每月需存多少（复利模拟） |
 | Time Card Calculator | 打卡工时计算：跨夜班、扣午休、时薪算周薪 |
 | Area Converter | 平方米/平方英尺/英亩/公顷等 7 种面积单位互转 |
+
+## 🛠️ 英文站新增（2026-11-02）
+
+| 工具 | 说明 |
+|------|------|
+| Time Zone Converter | 任意日期时间在 UTC/EST/PST/CET/IST/JST 等时区间互转 + 实时世界时钟 |
+| Online Calculator | 基础四则计算器，支持键盘输入、百分号、平方根、记忆键 |
+| Remove Line Breaks | 去除换行符：合并成一行 / 替换为空格或自定义分隔符 / 仅删空行 |
+| Credit Card Validator | Luhn 算法校验卡号 + 发卡行品牌识别，纯本地计算 |
+| Ratio Calculator | 比例化简（最大公约数）、A:B=C:x 缺项求解、百分比分配 |
 
 ## 📁 目录结构
 
