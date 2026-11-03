@@ -5,6 +5,7 @@
 function initNav() {
   const toggle = document.getElementById('menuToggle');
   const nav = document.getElementById('mainNav');
+  if (!toggle || !nav) return;
   toggle.addEventListener('click', () => nav.classList.toggle('open'));
 
   nav.querySelectorAll('a').forEach(a => {
@@ -222,7 +223,10 @@ function hslToHex(h, s, l) {
   return '#' + f(0)+f(8)+f(4);
 }
 function colorUpdate(fromHex) {
-  const hex = document.getElementById('color-hex').value.trim();
+  const hexEl = document.getElementById('color-hex');
+  if (!hexEl || !document.getElementById('color-picker') ||
+      !document.getElementById('color-info') || !document.getElementById('palette-out')) return;
+  const hex = hexEl.value.trim();
   const rgb = hexToRgb(hex);
   if (!rgb) return;
   document.getElementById('color-picker').value = '#' + hex.replace('#','').toLowerCase();
