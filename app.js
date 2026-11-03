@@ -173,7 +173,7 @@ function startClock() {
 function tsToDate() {
   let ts = document.getElementById('ts-input').value.trim();
   const out = document.getElementById('ts-date-out');
-  if (!/^(?:\d{10}|\d{13})$/.test(ts)) { out.textContent = '❌ 请输入 10 位（秒）或 13 位（毫秒）数字时间戳'; return; }
+  if (!/^\d{10,13}$/.test(ts)) { out.textContent = '❌ 请输入 10 位（秒）或 13 位（毫秒）数字时间戳'; return; }
   if (ts.length === 10) ts = +ts * 1000;
   const d = new Date(+ts);
   out.textContent = '本地时间：' + d.toLocaleString('zh-CN', { hour12: false })
@@ -217,7 +217,7 @@ function hslToHex(h, s, l) {
   const f = n => {
     const k = (n + h/30) % 12;
     const a = s * Math.min(l, 1-l);
-    const c = l - a * Math.max(-1, Math.min(k-3, Math.min(9-k, 1)));
+    const c = l - a * Math.min(-1, Math.min(k-3, Math.min(9-k, 1)));
     return Math.round(255*c).toString(16).padStart(2,'0');
   };
   return '#' + f(0)+f(8)+f(4);
@@ -372,8 +372,6 @@ function radixConvert() {
   const val = document.getElementById('radix-input').value.trim();
   const out = document.getElementById('radix-out');
   if (!val) { out.textContent = ''; return; }
-  const digits = { 2: /^-?[01]+$/, 8: /^-?[0-7]+$/, 10: /^-?[0-9]+$/, 16: /^-?[0-9a-f]+$/i }[from];
-  if (!digits || !digits.test(val)) { out.textContent = '❌ 输入不是有效的' + from + '进制数字'; return; }
   const num = parseInt(val, from);
   if (isNaN(num)) { out.textContent = '❌ 输入不是有效的' + from + '进制数字'; return; }
   out.textContent = '二进制 : ' + num.toString(2) + '\n八进制 : ' + num.toString(8) +
@@ -448,9 +446,9 @@ function caseDo(mode) {
   let r = text;
   if (mode === 'upper') r = text.toUpperCase();
   else if (mode === 'lower') r = text.toLowerCase();
-  else if (mode === 'cap') r = text.toLowerCase().replace(/(^|\s)(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
-  else if (mode === 'camel') r = text.toLowerCase().replace(/[^\p{L}\p{N}]+(\p{L})?/gu, (m, c) => c ? c.toUpperCase() : '');
-  else if (mode === 'snake') r = text.replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2').replace(/([a-z0-9])([A-Z])/g, '$1_$2').replace(/[\s-]+/g, '_').toLowerCase();
+  else if (mode === 'cap') r = text.toLowerCase().replace(/(^|\s+)([a-z])/g, (m, a, b) => a + b.toUpperCase());
+  else if (mode === 'camel') r = text.toLowerCase().replace(/[^a-zA-Z0-9]+(.)?/g, (m, c) => c ? c.toUpperCase() : '');
+  else if (mode === 'snake') r = text.replace(/([a-z])([A-Z])/g, '$1_$2').replace(/[\s-]+/g, '_').toLowerCase();
   document.getElementById('case-output').value = r;
 }
 
@@ -474,32 +472,22 @@ function csvToJson() {
   const sep = document.getElementById('csv-sep').value;
   const out = document.getElementById('csv-output');
   if (!text) { out.textContent = '请输入 CSV 内容'; return; }
-  const records = [];
-  let row = [], cur = '', inQ = false;
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i];
-    if (inQ) {
-      if (ch === '"') {
-        if (text[i + 1] === '"') { cur += '"'; i++; } else inQ = false;
-      } else cur += ch;
-    } else if (ch === '"') {
-      inQ = true;
-    } else if (ch === sep) {
-      row.push(cur); cur = '';
-    } else if (ch === '\n' || ch === '\r') {
-      if (ch === '\r' && text[i + 1] === '\n') i++;
-      row.push(cur); records.push(row); row = []; cur = '';
-    } else cur += ch;
-  }
-  if (cur !== '' || row.length) { row.push(cur); records.push(row); }
-  const rows = records.filter(r => !(r.length === 1 && r[0].trim() === ''));
-  const header = rows.length ? rows[0].map(c => c.trim()) : [];
-  const data = rows.slice(1).map(r => {
+  const lines = text.split(/\r?\n/).filter(l => l.trim());
+  const parseLine = l => {
+    const cells = [];
+    let cur = '', inQ = false;
+    for (const ch of l) {
+      if (ch === '"' && (inQ || cur === '' || true)) { inQ = !inQ; continue; }
+      if (ch === sep && !inQ) { cells.push(cur); cur = ''; } else cur += ch;
+    }
+    cells.push(cur);
+    return cells.map(c => c.trim());
+  };
+  const header = parseLine(lines[0]);
+  const data = lines.slice(1).map(l => {
+    const cells = parseLine(l);
     const obj = {};
-    header.forEach((h, i) => {
-      const c = (r[i] === undefined ? '' : r[i]).trim();
-      obj[h] = /^-?(0|[1-9]\d*)(\.\d+)?$/.test(c) ? +c : c;
-    });
+    header.forEach((h, i) => obj[h] = isNaN(+cells[i]) || cells[i] === '' ? cells[i] : +cells[i]);
     return obj;
   });
   out.textContent = JSON.stringify(data, null, 2);
@@ -533,7 +521,7 @@ function jwtDecode() {
   const token = document.getElementById('jwt-input').value.trim();
   const out = document.getElementById('jwt-output');
   const parts = token.split('.');
-  if (parts.length < 3) { out.textContent = '❌ 不是有效的 JWT（需要 header.payload.signature 三段）'; return; }
+  if (parts.length < 2) { out.textContent = '❌ 不是有效的 JWT（需要 header.payload.signature 三段）'; return; }
   const dec = s => {
     s = s.replace(/-/g, '+').replace(/_/g, '/');
     while (s.length % 4) s += '=';
