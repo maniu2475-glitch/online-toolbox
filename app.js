@@ -173,7 +173,7 @@ function startClock() {
 function tsToDate() {
   let ts = document.getElementById('ts-input').value.trim();
   const out = document.getElementById('ts-date-out');
-  if (!/^\d{10,13}$/.test(ts)) { out.textContent = '❌ 请输入 10 位（秒）或 13 位（毫秒）数字时间戳'; return; }
+  if (!/^(?:\d{10}|\d{13})$/.test(ts)) { out.textContent = '❌ 请输入 10 位（秒）或 13 位（毫秒）数字时间戳'; return; }
   if (ts.length === 10) ts = +ts * 1000;
   const d = new Date(+ts);
   out.textContent = '本地时间：' + d.toLocaleString('zh-CN', { hour12: false })
@@ -217,7 +217,7 @@ function hslToHex(h, s, l) {
   const f = n => {
     const k = (n + h/30) % 12;
     const a = s * Math.min(l, 1-l);
-    const c = l - a * Math.min(-1, Math.min(k-3, Math.min(9-k, 1)));
+    const c = l - a * Math.max(-1, Math.min(k-3, Math.min(9-k, 1)));
     return Math.round(255*c).toString(16).padStart(2,'0');
   };
   return '#' + f(0)+f(8)+f(4);
@@ -372,6 +372,8 @@ function radixConvert() {
   const val = document.getElementById('radix-input').value.trim();
   const out = document.getElementById('radix-out');
   if (!val) { out.textContent = ''; return; }
+  const digits = { 2: /^-?[01]+$/, 8: /^-?[0-7]+$/, 10: /^-?[0-9]+$/, 16: /^-?[0-9a-f]+$/i }[from];
+  if (!digits || !digits.test(val)) { out.textContent = '❌ 输入不是有效的' + from + '进制数字'; return; }
   const num = parseInt(val, from);
   if (isNaN(num)) { out.textContent = '❌ 输入不是有效的' + from + '进制数字'; return; }
   out.textContent = '二进制 : ' + num.toString(2) + '\n八进制 : ' + num.toString(8) +
